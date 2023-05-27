@@ -100,21 +100,35 @@ const routes = [
   },
   {
     type: "route",
-    name: "Sign In",
-    key: "sign-in",
-    route: "/authentication/sign-in",
-    icon: (
-      <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-single-copy-04" />
-    ),
-    component: <SignIn />,
+    name: "Admin Sign In",
+    key: "admin-sign-in",
+    route: "/authentication/admin/sign-in",
+    icon: <ArgonBox component="i" color="info" fontSize="14px" className="ni ni-collection" />,
+    component: <SignIn role='Admin' title='Admin Sign In' />,
   },
   {
     type: "route",
-    name: "Sign Up",
-    key: "sign-up",
-    route: "/authentication/sign-up",
+    name: "Patient Sign In",
+    key: "patient-sign-in",
+    route: "/authentication/patient/sign-in",
     icon: <ArgonBox component="i" color="info" fontSize="14px" className="ni ni-collection" />,
-    component: <SignUp />,
+    component: <SignIn role='Patient' title='Patient Sign In' />,
+  },
+  {
+    type: "route",
+    name: "Insurance Sign In",
+    key: "insurance-sign-in",
+    route: "/authentication/insurance/sign-in",
+    icon: <ArgonBox component="i" color="info" fontSize="14px" className="ni ni-collection" />,
+    component: <SignIn role='Insurance' title='Insurance Sign In' />,
+  },
+  {
+    type: "route",
+    name: "Hospital Sign In",
+    key: "hospital-sign-in",
+    route: "/authentication/hospital/sign-in",
+    icon: <ArgonBox component="i" color="info" fontSize="14px" className="ni ni-collection" />,
+    component: <SignIn role='Hospital' title='Hosptail Sign In' />,
   },
 ];
 

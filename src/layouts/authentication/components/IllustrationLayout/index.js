@@ -30,14 +30,7 @@ import PageLayout from "examples/LayoutContainers/PageLayout";
 function IllustrationLayout({ color, header, title, description, button, illustration, children }) {
   return (
     <PageLayout background="white">
-      <DefaultNavbar
-        action={{
-          type: "external",
-          route: "https://creative-tim.com/product/argon-dashboard-material-ui",
-          label: "Free Download",
-          ...button,
-        }}
-      />
+
       <Grid container>
         <Grid item xs={11} sm={8} md={6} lg={4} xl={3} sx={{ mx: "auto" }}>
           <ArgonBox display="flex" flexDirection="column" justifyContent="center" height="100vh">
@@ -80,6 +73,8 @@ function IllustrationLayout({ color, header, title, description, button, illustr
               src={illustration.image}
               alt="background"
               width="100%"
+              height="100%"
+              backgroundSize="contain"
               position="absolute"
               top={0}
               left={0}
@@ -92,7 +87,7 @@ function IllustrationLayout({ color, header, title, description, button, illustr
               position="absolute"
               topl={0}
               left={0}
-              opacity={0.7}
+              opacity={0.2}
             />
             <ArgonBox position="relative">
               {illustration.title && (
