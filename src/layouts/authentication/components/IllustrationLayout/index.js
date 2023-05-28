@@ -57,6 +57,8 @@ function IllustrationLayout({ color, header, title, description, button, illustr
               src={illustration.image}
               alt="background"
               width="100%"
+              height="100%"
+              backgroundSize="contain"
               position="absolute"
               top={0}
               left={0}
@@ -69,7 +71,7 @@ function IllustrationLayout({ color, header, title, description, button, illustr
               position="absolute"
               topl={0}
               left={0}
-              opacity={0.7}
+              opacity={0.2}
             />
             <ArgonBox position="relative">
               {illustration.title && (
