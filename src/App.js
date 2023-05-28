@@ -147,6 +147,10 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       <Routes>
         {getRoutes(routes)}
+        <Route exact path="/authentication/admin/sign-in" element={<SignIn role='Admin' title='Admin Sign In' />} key="admin-sign-in" />;
+        <Route exact path="/authentication/patient/sign-in" element={<SignIn role='Patient' title='Patient Sign In' />} key="patient-sign-in" />;
+        <Route exact path="/authentication/insurance/sign-in" element={<SignIn role='Insurance' title='Insurance Sign In' />} key="insurance-sign-in" />;
+        <Route exact path="/authentication/hospital/sign-in" element={<SignIn role='Hospital' title='Hosptail Sign In' />} key="hospital-sign-in" />;
         <Route exact path="/sign-in" element={<SignIn />} key="admin-sign-in" />;
         <Route exact path="/sign-up" element={<SignUp />} key="admin-sign-up" />;
         <Route path="*" element={<Navigate to="/dashboard" />} />
