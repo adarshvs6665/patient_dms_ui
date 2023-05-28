@@ -3,8 +3,8 @@ import Dashboard from "layouts/dashboard";
 import Tables from "layouts/tables";
 import Billing from "layouts/billing";
 import Profile from "layouts/profile";
-import SignIn from "layouts/authentication/sign-in/index"
-
+import SignIn from "layouts/authentication/sign-in"
+import SignUp from "layouts/authentication/sign-up";
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
 
@@ -74,6 +74,14 @@ const routes = [
     route: "/authentication/hospital/sign-in",
     icon: <ArgonBox component="i" color="info" fontSize="14px" className="ni ni-collection" />,
     component: <SignIn role='Hospital' title='Hosptail Sign In' />,
+  },
+  {
+    type: "route",
+    name: "Signup Route",
+    key: "sign-up",
+    route: "/authentication/sign-up",
+    icon: <ArgonBox component="i" color="dark" fontSize="14px" className="ni ni-single-02" />,
+    component: <SignUp />,
   },
 ];
 
