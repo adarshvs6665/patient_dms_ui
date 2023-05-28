@@ -75,14 +75,6 @@ const routes = [
     icon: <ArgonBox component="i" color="info" fontSize="14px" className="ni ni-collection" />,
     component: <SignIn role='Hospital' title='Hosptail Sign In' />,
   },
-  {
-    type: "route",
-    name: "Signup Route",
-    key: "sign-up",
-    route: "/authentication/sign-up",
-    icon: <ArgonBox component="i" color="dark" fontSize="14px" className="ni ni-single-02" />,
-    component: <SignUp />,
-  },
 ];
 
 export default routes;
