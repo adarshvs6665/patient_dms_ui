@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Argon Dashboard 2 MUI - v3.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-material-ui
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -30,14 +15,6 @@ import PageLayout from "examples/LayoutContainers/PageLayout";
 function IllustrationLayout({ color, header, title, description, button, illustration, children }) {
   return (
     <PageLayout background="white">
-      <DefaultNavbar
-        action={{
-          type: "external",
-          route: "https://creative-tim.com/product/argon-dashboard-material-ui",
-          label: "Free Download",
-          ...button,
-        }}
-      />
       <Grid container>
         <Grid item xs={11} sm={8} md={6} lg={4} xl={3} sx={{ mx: "auto" }}>
           <ArgonBox display="flex" flexDirection="column" justifyContent="center" height="100vh">
