@@ -17,7 +17,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  borderRadius: "10px",
   boxShadow: 24,
   p: 4,
 };
@@ -124,7 +124,7 @@ export default function AddInsuranceModal(props) {
               <ArgonButton color="secondary" size="medium" onClick={handleClose} fullWidth>
                 Cancel
               </ArgonButton>
-              <ArgonButton color="primary" size="medium" onClick={handleSubmit} fullWidth>
+              <ArgonButton color="dark" size="medium" onClick={handleSubmit} fullWidth>
                 Add Insurance
               </ArgonButton>
             </Stack>
