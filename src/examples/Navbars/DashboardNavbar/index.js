@@ -143,7 +143,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
             {miniSidenav ? "menu_open" : "menu"}
           </Icon>
         </ArgonBox>
-        {isMini ? null : (
+        {/* {isMini ? null : (
           <ArgonBox sx={(theme) => navbarRow(theme, { isMini })}>
             <ArgonBox pr={1}>
               <ArgonInput
@@ -204,7 +204,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
               {renderMenu()}
             </ArgonBox>
           </ArgonBox>
-        )}
+        )} */}
       </Toolbar>
     </AppBar>
   );

@@ -7,6 +7,8 @@ import SignIn from "layouts/authentication/sign-in"
 import SignUp from "layouts/authentication/sign-up";
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
+import Hospital from "layouts/hospital";
+import Insurance from "layouts/insurance";
 
 const routes = [
   {
@@ -42,7 +44,28 @@ const routes = [
     route: "/profile",
     icon: <ArgonBox component="i" color="dark" fontSize="14px" className="ni ni-single-02" />,
     component: <Profile />,
+  },
+  {
+    type: "route",
+    name: "Hospital",
+    key: "hosptal",
+    route: "/admin/hospital",
+    icon: (
+      <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-calendar-grid-58" />
+    ),
+    component: <Hospital />,
+  },
+  {
+    type: "route",
+    name: "Insurance Company",
+    key: "insurance",
+    route: "/admin/insurance",
+    icon: (
+      <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-calendar-grid-58" />
+    ),
+    component: <Insurance />,
   }
 ];
 
 export default routes;
+
