@@ -13,7 +13,6 @@ import Table from "examples/Tables/Table";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import { Stack } from "@mui/material";
 import ArgonButton from "components/ArgonButton";
-import AddHospitalModal from "./modal/addInsurance";
 import { useState } from "react";
 import insuranceTableData from "./data/insuranceTableData";
 import AddInsuranceModal from "./modal/addInsurance";
