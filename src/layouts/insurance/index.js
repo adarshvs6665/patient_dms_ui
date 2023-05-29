@@ -1,6 +1,6 @@
 // @mui material components
 import Card from "@mui/material/Card";
-
+import Icon from "@mui/material/Icon";
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
 import ArgonTypography from "components/ArgonTypography";
@@ -17,9 +17,6 @@ import { useState } from "react";
 import insuranceTableData from "./data/insuranceTableData";
 import AddInsuranceModal from "./modal/addInsurance";
 
-
-
-
 function Insurance() {
   const { columns, rows } = insuranceTableData;
   const [open, setOpen] = useState(false);
@@ -28,23 +25,26 @@ function Insurance() {
       <DashboardNavbar />
       <ArgonBox py={3}>
         <ArgonBox mb={3}>
-          <Card style={{height:"80vh", overflowY:"scroll"}}>
+          <Card style={{ height: "80vh", overflowY: "scroll" }}>
             <Stack direction="row" justifyContent="space-between">
-            <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
-              <ArgonTypography variant="h6">Insurance Company List</ArgonTypography>
-            </ArgonBox>
-            <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
-            <ArgonButton
-              component="a"
-              target="_blank"
-              rel="noreferrer"
-              color={'secondary'}
-              fullWidth
-              onClick={()=>{setOpen(true)}}
-            >
-              {"Add Insurance Company"}&nbsp;
-            </ArgonButton>
-            </ArgonBox>
+              <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
+                <ArgonTypography variant="h6">Insurance Company List</ArgonTypography>
+              </ArgonBox>
+              <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
+                <ArgonButton
+                  component="a"
+                  target="_blank"
+                  rel="noreferrer"
+                  color="dark"
+                  fullWidth
+                  onClick={() => {
+                    setOpen(true);
+                  }}
+                >
+                  <Icon sx={{ fontWeight: "bold" }}>add</Icon>
+                  &nbsp;{"Add Insurance"}&nbsp;
+                </ArgonButton>
+              </ArgonBox>
             </Stack>
             <ArgonBox
               sx={{
@@ -61,7 +61,7 @@ function Insurance() {
           </Card>
         </ArgonBox>
       </ArgonBox>
-      <AddInsuranceModal open={open} setOpen={setOpen}/>
+      <AddInsuranceModal open={open} setOpen={setOpen} />
       <Footer />
     </DashboardLayout>
   );

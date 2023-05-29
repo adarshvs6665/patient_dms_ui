@@ -1,5 +1,6 @@
 // @mui material components
 import Card from "@mui/material/Card";
+import Icon from "@mui/material/Icon";
 
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
@@ -17,9 +18,6 @@ import ArgonButton from "components/ArgonButton";
 import AddHospitalModal from "./modal/addHospital";
 import { useState } from "react";
 
-
-
-
 function Hospital() {
   const { columns, rows } = hospitalTableData;
   const [open, setOpen] = useState(false);
@@ -28,23 +26,26 @@ function Hospital() {
       <DashboardNavbar />
       <ArgonBox py={3}>
         <ArgonBox mb={3}>
-          <Card style={{height:"80vh", overflowY:"scroll"}}>
+          <Card style={{ height: "80vh", overflowY: "scroll" }}>
             <Stack direction="row" justifyContent="space-between">
-            <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
-              <ArgonTypography variant="h6">Hospital List</ArgonTypography>
-            </ArgonBox>
-            <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
-            <ArgonButton
-              component="a"
-              target="_blank"
-              rel="noreferrer"
-              color={'secondary'}
-              fullWidth
-              onClick={()=>{setOpen(true)}}
-            >
-              {"Add Hospital"}&nbsp;
-            </ArgonButton>
-            </ArgonBox>
+              <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
+                <ArgonTypography variant="h6">Hospital List</ArgonTypography>
+              </ArgonBox>
+              <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
+                <ArgonButton
+                  component="a"
+                  target="_blank"
+                  rel="noreferrer"
+                  color="dark"
+                  fullWidth
+                  onClick={() => {
+                    setOpen(true);
+                  }}
+                >
+                  <Icon sx={{ fontWeight: "bold" }}>add</Icon>
+                  &nbsp;{"Add Hospital"}&nbsp;
+                </ArgonButton>
+              </ArgonBox>
             </Stack>
             <ArgonBox
               sx={{
@@ -61,7 +62,7 @@ function Hospital() {
           </Card>
         </ArgonBox>
       </ArgonBox>
-      <AddHospitalModal open={open} setOpen={setOpen}/>
+      <AddHospitalModal open={open} setOpen={setOpen} />
       <Footer />
     </DashboardLayout>
   );
