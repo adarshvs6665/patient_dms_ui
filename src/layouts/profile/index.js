@@ -37,7 +37,7 @@ import team4 from "assets/images/team-4.jpg";
 const bgImage =
   "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg";
 
-function Overview() {
+function PatientProfile() {
   return (
     <DashboardLayout
       sx={{
@@ -179,4 +179,4 @@ function Overview() {
   );
 }
 
-export default Overview;
+export default PatientProfile;

@@ -6,8 +6,10 @@ import Profile from "layouts/profile";
 
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
-import Hospital from "layouts/hospital";
-import Insurance from "layouts/insurance";
+import Hospital from "layouts/admin/hospital";
+import Insurance from "layouts/admin/insurance";
+import PatientGrid from "layouts/hospital/patientGrid";
+import PatientProfile from "layouts/hospital/patientProfile";
 
 const routes = [
   {
@@ -53,6 +55,22 @@ const routes = [
     route: "/profile",
     icon: <ArgonBox component="i" color="dark" fontSize="14px" className="ni ni-single-02" />,
     component: <Profile />,
+  },
+  {
+    type: "route",
+    name: "Hospital Main",
+    key: "hsp-main",
+    route: "/hospital",
+    icon: <ArgonBox component="i" color="dark" fontSize="14px" className="ni ni-single-02" />,
+    component: <PatientGrid/>,
+  },
+  {
+    type: "route",
+    name: "Patient Profile Hospital",
+    key: "hsp-pat-prp",
+    route: "/hospital/patient-profile",
+    icon: <ArgonBox component="i" color="dark" fontSize="14px" className="ni ni-single-02" />,
+    component: <PatientProfile/>,
   },
 ];
 
