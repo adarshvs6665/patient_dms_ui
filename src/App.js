@@ -30,6 +30,7 @@ import createCache from "@emotion/cache";
 
 // Argon Dashboard 2 MUI routes
 import routes from "routes";
+import { hospitalRoutes, adminRoutes } from "routes";
 
 // Argon Dashboard 2 MUI contexts
 import { useArgonController, setMiniSidenav, setOpenConfigurator } from "context";
@@ -41,14 +42,57 @@ import brandDark from "assets/images/logo-ct-dark.png";
 // Icon Fonts
 import "assets/css/nucleo-icons.css";
 import "assets/css/nucleo-svg.css";
+import { Handshake } from "@mui/icons-material";
 
 export default function App() {
   const [controller, dispatch] = useArgonController();
-  const { miniSidenav, direction, layout, openConfigurator, sidenavColor, darkSidenav, darkMode } =
-    controller;
+  const {
+    miniSidenav,
+    direction,
+    layout,
+    openConfigurator,
+    sidenavColor,
+    darkSidenav,
+    darkMode,
+    role,
+  } = controller;
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
+  const [tmpRoutes, setTmpRoutes] = useState(routes);
+  const [brandName, setBrandName] = useState("PMS DAPP");
+
+  // useEffect(() => {
+  //   const auth = localStorage.getItem('auth')
+  //   console.log(auth);
+  // }, []);
+
+  useEffect(() => {
+    if (role === "admin") {
+      setTmpRoutes(adminRoutes);
+      setBrandName("Admin Dash");
+    } else if (role === "hospital") {
+      setTmpRoutes(hospitalRoutes);
+      setBrandName("Hospital Dash");
+    }
+  }, [role]);
+
+  // const handleRoutes = () => {
+  //   if (auth.role === "admin") {
+  //     setTmpRoutes(adminRoutes);
+  //     setBrandName("Admin Dash");
+  //   }
+  //   if (auth.role === "hospital") {
+  //     setTmpRoutes(hospitalRoutes);
+  //     setBrandName("Hospital Dash");
+  //   }
+  //   if (auth.role === "patient") {
+  //   }
+  //   if (auth.role === "admin") {
+  //   }
+  //   if (auth === {}) {
+  //   }
+  // };
 
   // Cache for the rtl
   useMemo(() => {
@@ -129,56 +173,54 @@ export default function App() {
 
   return (
     <ThemeProvider theme={darkMode ? themeDark : theme}>
-      <CssBaseline />
-      {layout === "dashboard" && (
-        <>
-          <Sidenav
-            color={sidenavColor}
-            brand={darkSidenav || darkMode ? brand : brandDark}
-            brandName="Argon Dashboard 2 PRO"
-            routes={routes}
-            onMouseEnter={handleOnMouseEnter}
-            onMouseLeave={handleOnMouseLeave}
+      <>
+        <CssBaseline />
+        {layout === "dashboard" && (
+          <>
+            <Sidenav
+              color={sidenavColor}
+              brand={darkSidenav || darkMode ? brand : brandDark}
+              brandName={brandName}
+              routes={tmpRoutes}
+              onMouseEnter={handleOnMouseEnter}
+              onMouseLeave={handleOnMouseLeave}
+            />
+            <Configurator />
+            {configsButton}
+          </>
+        )}
+
+        <Routes>
+          {getRoutes(tmpRoutes)}
+          <Route
+            exact
+            path="/authentication/admin/sign-in"
+            element={<SignIn role="Admin" title="Admin Sign In" />}
+            key="admin-sign-in"
           />
-          <Configurator />
-          {configsButton}
-        </>
-      )}
-      {layout === "vr" && <Configurator />}
-      <Routes>
-        {getRoutes(routes)}
-        <Route
-          exact
-          path="/authentication/admin/sign-in"
-          element={<SignIn role="Admin" title="Admin Sign In" />}
-          key="admin-sign-in"
-        />
-        ;
-        <Route
-          exact
-          path="/authentication/patient/sign-in"
-          element={<SignIn role="Patient" title="Patient Sign In" />}
-          key="patient-sign-in"
-        />
-        ;
-        <Route
-          exact
-          path="/authentication/insurance/sign-in"
-          element={<SignIn role="Insurance" title="Insurance Sign In" />}
-          key="insurance-sign-in"
-        />
-        ;
-        <Route
-          exact
-          path="/authentication/hospital/sign-in"
-          element={<SignIn role="Hospital" title="Hosptail Sign In" />}
-          key="hospital-sign-in"
-        />
-        ;
-        <Route exact path="/sign-in" element={<SignIn />} key="admin-sign-in" />;
-        <Route exact path="/sign-up" element={<SignUp />} key="admin-sign-up" />;
-        <Route path="*" element={<Navigate to="/dashboard" />} />
-      </Routes>
+          <Route
+            exact
+            path="/authentication/patient/sign-in"
+            element={<SignIn role="Patient" title="Patient Sign In" />}
+            key="patient-sign-in"
+          />
+          <Route
+            exact
+            path="/authentication/insurance/sign-in"
+            element={<SignIn role="Insurance" title="Insurance Sign In" />}
+            key="insurance-sign-in"
+          />
+          <Route
+            exact
+            path="/authentication/hospital/sign-in"
+            element={<SignIn role="Hospital" title="Hosptail Sign In" />}
+            key="hospital-sign-in"
+          />
+          <Route exact path="/sign-in" element={<SignIn />} key="admin-sign-in" />
+          <Route exact path="/sign-up" element={<SignUp />} key="admin-sign-up" />
+          <Route path="*" element={<Navigate to="/dashboard" />} />
+        </Routes>
+      </>
     </ThemeProvider>
   );
 }

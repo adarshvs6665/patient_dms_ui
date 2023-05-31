@@ -43,7 +43,7 @@ function PatientGrid() {
                   }}
                 >
                   <Icon sx={{ fontWeight: "bold" }}>add</Icon>
-                  &nbsp;{"Add Hospital"}&nbsp;
+                  &nbsp;{"Add Patient"}&nbsp;
                 </ArgonButton>
               </ArgonBox>
             </Stack>

@@ -5,6 +5,8 @@ import ArgonTypography from "components/ArgonTypography";
 import ArgonAvatar from "components/ArgonAvatar";
 import ArgonButton from "components/ArgonButton";
 
+import VisibilityIcon from '@mui/icons-material/Visibility';
+
 const patientImageUrl = "https://cdn-icons-png.flaticon.com/512/1430/1430453.png";
 
 function NameAndEmail({ image, name, email }) {
@@ -29,7 +31,7 @@ function ViewProfile() {
   return (
     <ArgonBox display="flex" alignItems="center" px={1} py={0.5}>
       <ArgonButton color="dark" size="medium"  fullWidth>
-        View Profile
+      <VisibilityIcon /> &nbsp; View
       </ArgonButton>
     </ArgonBox>
   );

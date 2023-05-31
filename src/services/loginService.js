@@ -4,7 +4,6 @@ export const adminLoginService = async (data) => {
     try {
       const response = await axios.post("http://localhost:5000/admin/sign-in", data);
       localStorage.setItem("auth", JSON.stringify({ role: response.data.role, id: response.data.id }));
-      // window.location.href = "/admin/dashboard";
       return response.data;
     } catch (error) {
       throw error.response.data;

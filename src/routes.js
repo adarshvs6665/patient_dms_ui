@@ -73,6 +73,51 @@ const routes = [
     component: <PatientProfile/>,
   },
 ];
+export const adminRoutes = [
+  {
+    type: "route",
+    name: "Hospitals",
+    key: "hospitals",
+    route: "admin/hospitals",
+    icon: (
+      <ArgonBox component="i" color="error" fontSize="14px" className="ni ni-building" />
+    ),
+    component: <Hospital />,
+  },
+  {
+    type: "route",
+    name: "Insurances",
+    key: "insurance-companies",
+    route: "admin/insurance-companies",
+    icon: (
+      <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-credit-card" />
+    ),
+    component: <Insurance />,
+  }
+];
+export const hospitalRoutes = [
+  {
+    type: "route",
+    name: "Hospital Main",
+    key: "hospital",
+    route: "/hospital",
+    icon: <ArgonBox component="i" color="dark" fontSize="14px" className="ni ni-single-02" />,
+    component: <PatientGrid/>,
+  },
+  {
+    type: "route",
+    name: "Patient Profile Hospital",
+    key: "patient-profile",
+    route: "/hospital/patient-profile",
+    icon: <ArgonBox component="i" color="dark" fontSize="14px" className="ni ni-single-02" />,
+    component: <PatientProfile/>,
+  },
+];
+
+export const patientRoutes = [
+];
+
+export const insuranceRoutes = [
+];
 
 export default routes;
-

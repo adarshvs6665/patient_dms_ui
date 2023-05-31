@@ -44,6 +44,9 @@ function reducer(state, action) {
     case "DARK_MODE": {
       return { ...state, darkMode: action.value };
     }
+    case "SET_ROLE": {
+      return { ...state, role: action.value };
+    }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
@@ -62,6 +65,7 @@ function ArgonControllerProvider({ children }) {
     direction: "ltr",
     layout: "dashboard",
     darkMode: false,
+    role: ""
   };
 
   const [controller, dispatch] = useReducer(reducer, initialState);
@@ -97,6 +101,7 @@ const setOpenConfigurator = (dispatch, value) => dispatch({ type: "OPEN_CONFIGUR
 const setDirection = (dispatch, value) => dispatch({ type: "DIRECTION", value });
 const setLayout = (dispatch, value) => dispatch({ type: "LAYOUT", value });
 const setDarkMode = (dispatch, value) => dispatch({ type: "DARK_MODE", value });
+const setRole = (dispatch, value) => dispatch({ type: "SET_ROLE", value });
 
 export {
   ArgonControllerProvider,
@@ -110,4 +115,5 @@ export {
   setDirection,
   setLayout,
   setDarkMode,
+  setRole
 };

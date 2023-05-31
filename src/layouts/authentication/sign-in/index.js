@@ -15,6 +15,11 @@ import { hospitalLoginService } from "services/loginService";
 import { patientLoginService } from "services/loginService";
 import { insuranceLoginService } from "services/loginService";
 
+import { useNavigate } from "react-router-dom";
+
+// Argon Dashboard 2 MUI contexts
+import { useArgonController, setRole } from "context";
+
 Illustration.propTypes = {
   role: PropTypes.string,
   title: PropTypes.string,
@@ -34,6 +39,9 @@ const adminBG =
 function Illustration({ role, title }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [controller, dispatch] = useArgonController();
+  const { miniSidenav, darkSidenav, role: roleNew } = controller;
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     if (email === "" || password === "") {
@@ -44,6 +52,10 @@ function Illustration({ role, title }) {
           try {
             const response = await adminLoginService({email,password});
             console.log("Res",response);
+            console.log(roleNew);
+            setRole(dispatch, "admin");
+            console.log(roleNew);
+            navigate("/admin/hospitals");
           } catch (error) {
             toast(error.message)
           }
@@ -60,6 +72,10 @@ function Illustration({ role, title }) {
           try {
             const response = await hospitalLoginService({email,password});
             console.log("Res",response);
+            console.log(roleNew);
+            await setRole(dispatch, "hospital");
+            console.log(roleNew);
+            navigate("/hospital");
           } catch (error) {
             toast(error.message)
           }

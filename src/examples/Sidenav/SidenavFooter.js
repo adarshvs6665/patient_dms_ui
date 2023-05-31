@@ -8,20 +8,45 @@ import ArgonTypography from "components/ArgonTypography";
 
 // Argon Dashboard 2 MUI context
 import { useArgonController } from "context";
+import { useNavigate } from "react-router-dom";
 
 // Images
 import icon from "assets/images/illustrations/icon-documentation.svg";
+import { useEffect, useState } from "react";
+import { setRole } from "context";
 
 function SidenavFooter() {
-  const [controller] = useArgonController();
-  const { miniSidenav, darkSidenav } = controller;
+  const [controller, dispatch] = useArgonController();
+  const { miniSidenav, darkSidenav, role } = controller;
+  const navigate = useNavigate();
+
+  const handleLogout = ()=>{
+    if (role==='admin'){
+      setRole(dispatch, "")
+      navigate("authentication/admin/sign-in");
+    }
+    if (role==='hospital'){
+      setRole(dispatch, "")
+      navigate('authentication/hospital/sign-in')
+    }
+    // if (auth.role==='patient'){
+      
+    // }
+    // if (auth.role==='admin'){
+      
+    // }
+    // if(auth==={}){
+      
+    // }
+    // localStorage.setItem('auth',JSON.stringify({}))
+  }
+
 
   return (
     <ArgonBox opacity={miniSidenav ? 0 : 1} sx={{ transition: "opacity 200ms linear" }}>
       <ArgonBox display="flex" flexDirection="column">
         <ArgonButton
-          component={Link}
-          href="#"
+          onClick={()=>{handleLogout()}}
           rel="noreferrer"
           color="dark"
           size="small"
