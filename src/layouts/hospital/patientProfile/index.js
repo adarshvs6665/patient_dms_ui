@@ -51,7 +51,7 @@ function Overview() {
             />
           </Grid>
           <Grid item xs={12} xl={8}>
-            <HospitalInsuranceList title="Assigned Hospitals" list={profilesListData} />
+            <HospitalInsuranceList title="Authorized Hospitals" list={profilesListData} />
           </Grid>
         </Grid>
       </ArgonBox>

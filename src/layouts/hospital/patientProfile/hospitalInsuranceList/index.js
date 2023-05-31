@@ -57,8 +57,19 @@ function HospitalInsuranceList({ title, list }) {
           {title}
         </ArgonTypography>
         <ArgonTypography  variant="body2" color="secondary" onClick={()=>{setOpen(true)}}>
-          <Tooltip title={"Add new item"} placement="top">
-            <Icon>edit</Icon>
+          <Tooltip title={"Authorize new hospital"} placement="top">
+          <ArgonButton
+                  component="button"
+                  rel="noreferrer"
+                  color="dark"
+                  fullWidth
+                  onClick={() => {
+                    setOpen(true);
+                  }}
+                >
+                  <Icon sx={{ fontWeight: "bold" }}>add</Icon>
+                  &nbsp;{"Authorize"}&nbsp;
+                </ArgonButton>
           </Tooltip>
         </ArgonTypography>
       </ArgonBox>
