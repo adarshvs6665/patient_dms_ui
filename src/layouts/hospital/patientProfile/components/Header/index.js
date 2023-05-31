@@ -81,18 +81,26 @@ function Header() {
           <Grid item xs={12} md={6} lg={4} sx={{ ml: "auto" }}>
             <AppBar position="static">
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
-                <Tab label="Authorized Hospitals" style={{fontSize:".8rem", fontWeight: "bold"}} icon={
+                <Tab
+                  label="Authorized Hospitals"
+                  style={{ fontSize: ".8rem", fontWeight: "bold" }}
+                  icon={
                     <i
                       className="ni ni-building"
                       style={{ marginTop: "6px", marginRight: "8px", color: "red" }}
                     />
-                  } />
-                <Tab label="Authorized Insurances" style={{fontSize:".8rem", fontWeight: "bold"}} icon={
+                  }
+                />
+                <Tab
+                  label="Authorized Insurances"
+                  style={{ fontSize: ".8rem", fontWeight: "bold" }}
+                  icon={
                     <i
                       className="ni ni-credit-card"
                       style={{ marginTop: "6px", marginRight: "8px", color: "orange" }}
                     />
-                  } />
+                  }
+                />
               </Tabs>
             </AppBar>
           </Grid>
