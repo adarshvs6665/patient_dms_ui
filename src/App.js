@@ -59,13 +59,8 @@ export default function App() {
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
-  const [tmpRoutes, setTmpRoutes] = useState(routes);
+  const [tmpRoutes, setTmpRoutes] = useState([]);
   const [brandName, setBrandName] = useState("PMS DAPP");
-
-  // useEffect(() => {
-  //   const auth = localStorage.getItem('auth')
-  //   console.log(auth);
-  // }, []);
 
   useEffect(() => {
     if (role === "admin") {
@@ -77,22 +72,6 @@ export default function App() {
     }
   }, [role]);
 
-  // const handleRoutes = () => {
-  //   if (auth.role === "admin") {
-  //     setTmpRoutes(adminRoutes);
-  //     setBrandName("Admin Dash");
-  //   }
-  //   if (auth.role === "hospital") {
-  //     setTmpRoutes(hospitalRoutes);
-  //     setBrandName("Hospital Dash");
-  //   }
-  //   if (auth.role === "patient") {
-  //   }
-  //   if (auth.role === "admin") {
-  //   }
-  //   if (auth === {}) {
-  //   }
-  // };
 
   // Cache for the rtl
   useMemo(() => {

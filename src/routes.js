@@ -98,7 +98,7 @@ export const adminRoutes = [
 export const hospitalRoutes = [
   {
     type: "route",
-    name: "Hospital Main",
+    name: "Patients",
     key: "hospital",
     route: "/hospital",
     icon: <ArgonBox component="i" color="dark" fontSize="14px" className="ni ni-single-02" />,

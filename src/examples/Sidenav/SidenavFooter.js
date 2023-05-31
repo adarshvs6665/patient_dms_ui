@@ -23,22 +23,14 @@ function SidenavFooter() {
   const handleLogout = ()=>{
     if (role==='admin'){
       setRole(dispatch, "")
+      localStorage.setItem("auth", JSON.stringify({ role: "", id: "" }));
       navigate("authentication/admin/sign-in");
     }
     if (role==='hospital'){
       setRole(dispatch, "")
+      localStorage.setItem("auth", JSON.stringify({ role: "", id: "" }));
       navigate('authentication/hospital/sign-in')
     }
-    // if (auth.role==='patient'){
-      
-    // }
-    // if (auth.role==='admin'){
-      
-    // }
-    // if(auth==={}){
-      
-    // }
-    // localStorage.setItem('auth',JSON.stringify({}))
   }
 
 
