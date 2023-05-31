@@ -13,22 +13,22 @@ import { useNavigate } from "react-router-dom";
 // Images
 import icon from "assets/images/illustrations/icon-documentation.svg";
 import { useEffect, useState } from "react";
-import { setRole } from "context";
+import { setAuth } from "context";
 
 function SidenavFooter() {
   const [controller, dispatch] = useArgonController();
-  const { miniSidenav, darkSidenav, role } = controller;
+  const { miniSidenav, darkSidenav, auth } = controller;
   const navigate = useNavigate();
 
   const handleLogout = ()=>{
-    if (role==='admin'){
-      setRole(dispatch, "")
+    if (auth.role==='admin'){
       localStorage.setItem("auth", JSON.stringify({ role: "", id: "" }));
+      setAuth(dispatch, {})
       navigate("authentication/admin/sign-in");
     }
-    if (role==='hospital'){
-      setRole(dispatch, "")
+    if (auth.role==='hospital'){
       localStorage.setItem("auth", JSON.stringify({ role: "", id: "" }));
+      setAuth(dispatch, {})
       navigate('authentication/hospital/sign-in')
     }
   }

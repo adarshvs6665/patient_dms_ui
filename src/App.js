@@ -54,7 +54,7 @@ export default function App() {
     sidenavColor,
     darkSidenav,
     darkMode,
-    role,
+    auth,
   } = controller;
   const [onMouseEnter, setOnMouseEnter] = useState(false);
   const [rtlCache, setRtlCache] = useState(null);
@@ -63,14 +63,14 @@ export default function App() {
   const [brandName, setBrandName] = useState("PMS DAPP");
 
   useEffect(() => {
-    if (role === "admin") {
+    if (auth.role === "admin") {
       setTmpRoutes(adminRoutes);
       setBrandName("Admin Dash");
-    } else if (role === "hospital") {
+    } else if (auth.role === "hospital") {
       setTmpRoutes(hospitalRoutes);
       setBrandName("Hospital Dash");
     }
-  }, [role]);
+  }, [auth]);
 
 
   // Cache for the rtl
@@ -170,7 +170,13 @@ export default function App() {
         )}
 
         <Routes>
-          {getRoutes(tmpRoutes)}
+
+          {/* if admin is logged in only admin routes are enabled */}
+          {auth.role === "hospital" && getRoutes(hospitalRoutes)}
+
+          {/* if hospital is logged in only hospital routes are enabled */}
+          {auth.role === "admin" && getRoutes(adminRoutes)}
+
           <Route
             exact
             path="/authentication/admin/sign-in"
@@ -197,7 +203,13 @@ export default function App() {
           />
           <Route exact path="/sign-in" element={<SignIn />} key="admin-sign-in" />
           <Route exact path="/sign-up" element={<SignUp />} key="admin-sign-up" />
-          <Route path="*" element={<Navigate to="/dashboard" />} />
+
+          {/* if admin is logged in and any random route is accessed the page is redirected to admin dashboard */}
+          {auth.role === "admin" && <Route path="*" element={<Navigate to="/admin/hospital" />} />}
+
+          {/* if admin is logged in and any random route is accessed the page is redirected to admin dashboard */}
+          {auth.role === "hospital" && <Route path="*" element={<Navigate to="/hospital/patients" />} />}
+          
         </Routes>
       </>
     </ThemeProvider>

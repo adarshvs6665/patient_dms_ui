@@ -24,7 +24,7 @@ const routes = [
     type: "route",
     name: "Hospitals",
     key: "hospitals",
-    route: "admin/hospitals",
+    route: "/admin/hospital",
     icon: (
       <ArgonBox component="i" color="error" fontSize="14px" className="ni ni-building" />
     ),
@@ -34,7 +34,7 @@ const routes = [
     type: "route",
     name: "Insurances",
     key: "insurance-companies",
-    route: "admin/insurance-companies",
+    route: "/admin/insurance-companies",
     icon: (
       <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-credit-card" />
     ),
@@ -60,7 +60,7 @@ const routes = [
     type: "route",
     name: "Hospital Main",
     key: "hsp-main",
-    route: "/hospital",
+    route: "/hospital/patients",
     icon: <ArgonBox component="i" color="dark" fontSize="14px" className="ni ni-single-02" />,
     component: <PatientGrid/>,
   },
@@ -73,12 +73,13 @@ const routes = [
     component: <PatientProfile/>,
   },
 ];
+
 export const adminRoutes = [
   {
     type: "route",
-    name: "Hospitals",
+    name: "Hospital",
     key: "hospitals",
-    route: "admin/hospitals",
+    route: "admin/hospital",
     icon: (
       <ArgonBox component="i" color="error" fontSize="14px" className="ni ni-building" />
     ),
@@ -86,7 +87,7 @@ export const adminRoutes = [
   },
   {
     type: "route",
-    name: "Insurances",
+    name: "Insurance Company",
     key: "insurance-companies",
     route: "admin/insurance-companies",
     icon: (
@@ -100,8 +101,8 @@ export const hospitalRoutes = [
     type: "route",
     name: "Patients",
     key: "hospital",
-    route: "/hospital",
-    icon: <ArgonBox component="i" color="dark" fontSize="14px" className="ni ni-single-02" />,
+    route: "/hospital/patients",
+    icon: <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-single-02" />,
     component: <PatientGrid/>,
   },
   {

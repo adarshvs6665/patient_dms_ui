@@ -44,8 +44,8 @@ function reducer(state, action) {
     case "DARK_MODE": {
       return { ...state, darkMode: action.value };
     }
-    case "SET_ROLE": {
-      return { ...state, role: action.value };
+    case "SET_AUTH": {
+      return { ...state, auth: action.value };
     }
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
@@ -56,7 +56,6 @@ function reducer(state, action) {
 // Argon Dashboard 2 MUI context provider
 function ArgonControllerProvider({ children }) {
   const auth = JSON.parse(localStorage.getItem("auth"))
-  console.log(auth.role);
   const initialState = {
     miniSidenav: false,
     darkSidenav: false,
@@ -67,7 +66,7 @@ function ArgonControllerProvider({ children }) {
     direction: "ltr",
     layout: "dashboard",
     darkMode: false,
-    role: auth.role
+    auth: auth
   };
 
   const [controller, dispatch] = useReducer(reducer, initialState);
@@ -103,7 +102,7 @@ const setOpenConfigurator = (dispatch, value) => dispatch({ type: "OPEN_CONFIGUR
 const setDirection = (dispatch, value) => dispatch({ type: "DIRECTION", value });
 const setLayout = (dispatch, value) => dispatch({ type: "LAYOUT", value });
 const setDarkMode = (dispatch, value) => dispatch({ type: "DARK_MODE", value });
-const setRole = (dispatch, value) => dispatch({ type: "SET_ROLE", value });
+const setAuth = (dispatch, value) => dispatch({ type: "SET_AUTH", value });
 
 export {
   ArgonControllerProvider,
@@ -117,5 +116,5 @@ export {
   setDirection,
   setLayout,
   setDarkMode,
-  setRole
+  setAuth
 };

@@ -18,7 +18,7 @@ import { insuranceLoginService } from "services/loginService";
 import { useNavigate } from "react-router-dom";
 
 // Argon Dashboard 2 MUI contexts
-import { useArgonController, setRole } from "context";
+import { useArgonController, setAuth } from "context";
 
 Illustration.propTypes = {
   role: PropTypes.string,
@@ -40,7 +40,7 @@ function Illustration({ role, title }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [controller, dispatch] = useArgonController();
-  const { miniSidenav, darkSidenav, role: roleNew } = controller;
+  const { miniSidenav, darkSidenav, auth } = controller;
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
@@ -52,10 +52,10 @@ function Illustration({ role, title }) {
           try {
             const response = await adminLoginService({email,password});
             console.log("Res",response);
-            console.log(roleNew);
-            setRole(dispatch, "admin");
-            console.log(roleNew);
-            navigate("/admin/hospitals");
+            const auth = JSON.parse(localStorage.getItem("auth"))
+            setAuth(dispatch, auth);
+            console.log(auth.role);
+            navigate("/admin/hospital");
           } catch (error) {
             toast(error.message)
           }
@@ -72,10 +72,11 @@ function Illustration({ role, title }) {
           try {
             const response = await hospitalLoginService({email,password});
             console.log("Res",response);
-            console.log(roleNew);
-            await setRole(dispatch, "hospital");
-            console.log(roleNew);
-            navigate("/hospital");
+            const auth = JSON.parse(localStorage.getItem("auth"))
+            console.log(auth.role);
+            await setAuth(dispatch, auth);
+            console.log(auth.role);
+            navigate("/hospital/patients");
           } catch (error) {
             toast(error.message)
           }

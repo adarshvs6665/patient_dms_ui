@@ -42,10 +42,10 @@ function ProfileInfoCard({ title, info}) {
   // Render the card info items
   const renderItems = labels.map((label, key) => (
     <ArgonBox key={label} display="flex" py={1} pr={2}>
-      <ArgonTypography variant="button" fontWeight="bold" textTransform="capitalize">
+      <ArgonTypography variant="button" fontWeight="bold" textTransform="capitalize" fontSize=".9rem">
         {label}: &nbsp;
       </ArgonTypography>
-      <ArgonTypography variant="button" fontWeight="regular" color="text">
+      <ArgonTypography variant="button" fontWeight="regular" color="text" fontSize=".8rem">
         &nbsp;{values[key]}
       </ArgonTypography>
     </ArgonBox>
