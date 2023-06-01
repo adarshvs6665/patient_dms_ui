@@ -55,7 +55,7 @@ function reducer(state, action) {
 
 // Argon Dashboard 2 MUI context provider
 function ArgonControllerProvider({ children }) {
-  const auth = JSON.parse(localStorage.getItem("auth"))
+  const auth = JSON.parse(localStorage.getItem("auth")) || {};
   const initialState = {
     miniSidenav: false,
     darkSidenav: false,
@@ -66,7 +66,7 @@ function ArgonControllerProvider({ children }) {
     direction: "ltr",
     layout: "dashboard",
     darkMode: false,
-    auth: auth
+    auth: auth,
   };
 
   const [controller, dispatch] = useReducer(reducer, initialState);
@@ -116,5 +116,5 @@ export {
   setDirection,
   setLayout,
   setDarkMode,
-  setAuth
+  setAuth,
 };

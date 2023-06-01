@@ -72,7 +72,6 @@ export default function App() {
     }
   }, [auth]);
 
-
   // Cache for the rtl
   useMemo(() => {
     const cacheRtl = createCache({
@@ -170,13 +169,6 @@ export default function App() {
         )}
 
         <Routes>
-
-          {/* if admin is logged in only admin routes are enabled */}
-          {auth.role === "hospital" && getRoutes(hospitalRoutes)}
-
-          {/* if hospital is logged in only hospital routes are enabled */}
-          {auth.role === "admin" && getRoutes(adminRoutes)}
-
           <Route
             exact
             path="/authentication/admin/sign-in"
@@ -204,12 +196,19 @@ export default function App() {
           <Route exact path="/sign-in" element={<SignIn />} key="admin-sign-in" />
           <Route exact path="/sign-up" element={<SignUp />} key="admin-sign-up" />
 
+          {/* if admin is logged in only admin routes are enabled */}
+          {auth.role === "hospital" && getRoutes(hospitalRoutes)}
+
+          {/* if hospital is logged in only hospital routes are enabled */}
+          {auth.role === "admin" && getRoutes(adminRoutes)}
+
           {/* if admin is logged in and any random route is accessed the page is redirected to admin dashboard */}
           {auth.role === "admin" && <Route path="*" element={<Navigate to="/admin/hospital" />} />}
 
           {/* if admin is logged in and any random route is accessed the page is redirected to admin dashboard */}
-          {auth.role === "hospital" && <Route path="*" element={<Navigate to="/hospital/patients" />} />}
-          
+          {auth.role === "hospital" && (
+            <Route path="*" element={<Navigate to="/hospital/patients" />} />
+          )}
         </Routes>
       </>
     </ThemeProvider>
