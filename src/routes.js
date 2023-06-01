@@ -100,7 +100,7 @@ export const hospitalRoutes = [
   {
     type: "route",
     name: "Patients",
-    key: "hospital",
+    key: "patients",
     route: "/hospital/patients",
     icon: <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-single-02" />,
     component: <PatientGrid/>,
