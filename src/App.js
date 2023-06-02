@@ -218,12 +218,6 @@ export default function App() {
           
           <Route exact path="/sign-up" element={<SignUp />} key="admin-sign-up" />
 
-          {/* if admin is logged in only admin routes are enabled */}
-          {auth.role === "hospital" && getRoutes(hospitalRoutes)}
-
-          {/* if hospital is logged in only hospital routes are enabled */}
-          {auth.role === "admin" && getRoutes(adminRoutes)}
-
           {/* if admin is logged in and any random route is accessed the page is redirected to admin dashboard */}
           {auth.role === "admin" && <Route path="*" element={<Navigate to="/admin/hospitals" />} />}
 
@@ -235,6 +229,9 @@ export default function App() {
 
           {/* if insurance is logged in and any random route is accessed the page is redirected to insurance dashboard */}
           {auth.role === "patient" && <Route path="*" element={<Navigate to="/patient/profile" />} />}
+
+           {/* if insurance is logged in and any random route is accessed the page is redirected to insurance dashboard */}
+           {!auth.role && <Route path="*" element={<Navigate to="/authentication/admin/sign-in" />} />}
           
         </Routes>
       </>
