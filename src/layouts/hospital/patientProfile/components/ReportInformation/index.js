@@ -10,13 +10,13 @@ import Report from "layouts/hospital/patientProfile/components/Report";
 
 function ReportInformation() {
   return (
-    <Card id="delete-account">
-      <ArgonBox pt={3} px={2}>
+    <Card id="delete-account" >
+      <ArgonBox pt={3} px={2} pb={2}>
         <ArgonTypography variant="h6" fontWeight="medium">
-          Report Information
+          Patient Reports
         </ArgonTypography>
       </ArgonBox>
-      <ArgonBox pt={1} pb={2} px={2}>
+      <ArgonBox pt={1} pb={2} px={2} sx={{ height: "50vh", overflowY:"scroll" }}>
         <ArgonBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
           <Report
             name="oliver liam"

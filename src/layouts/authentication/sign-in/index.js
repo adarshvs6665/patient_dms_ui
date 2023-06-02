@@ -10,15 +10,19 @@ import { ToastContainer, toast } from "react-toastify";
 
 // Authentication layout components
 import IllustrationLayout from "layouts/authentication/components/IllustrationLayout";
-import { adminLoginService ,} from "services/loginService";
+import { adminLoginService } from "services/loginService";
 import { hospitalLoginService } from "services/loginService";
 import { patientLoginService } from "services/loginService";
 import { insuranceLoginService } from "services/loginService";
 
 import { useNavigate } from "react-router-dom";
 
+import { setOpenConfigurator } from "context";
+
 // Argon Dashboard 2 MUI contexts
 import { useArgonController, setAuth } from "context";
+import { Icon } from "@mui/material";
+import Configurator from "layouts/authentication/components/Configurator"
 
 Illustration.propTypes = {
   role: PropTypes.string,
@@ -40,7 +44,17 @@ function Illustration({ role, title }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [controller, dispatch] = useArgonController();
-  const { miniSidenav, darkSidenav, auth } = controller;
+  const {
+    miniSidenav,
+    darkSidenav,
+    auth,
+    direction,
+    layout,
+    openConfigurator,
+    sidenavColor,
+    darkMode,
+  } = controller;
+
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
@@ -50,43 +64,53 @@ function Illustration({ role, title }) {
       switch (role) {
         case "Admin":
           try {
-            const response = await adminLoginService({email,password});
-            console.log("Res",response);
-            const auth = JSON.parse(localStorage.getItem("auth"))
+            const response = await adminLoginService({ email, password });
+            console.log("Res", response);
+            const auth = JSON.parse(localStorage.getItem("auth"));
             setAuth(dispatch, auth);
             console.log(auth.role);
-            navigate("/admin/hospital");
+            navigate("/admin/hospitals");
           } catch (error) {
-            toast(error.message)
+            toast(error.message);
           }
           break;
         case "Patient":
           try {
-            const response = await patientLoginService({email,password});
-            console.log("Res",response);
+            const response = await patientLoginService({ email, password });
+            console.log("Res", response);
+            const auth = JSON.parse(localStorage.getItem("auth"));
+            console.log(auth.role);
+            await setAuth(dispatch, auth);
+            console.log(auth.role);
+            navigate("/patient/profile");
           } catch (error) {
-            toast(error.message)
+            toast(error.message);
           }
           break;
         case "Hospital":
           try {
-            const response = await hospitalLoginService({email,password});
-            console.log("Res",response);
-            const auth = JSON.parse(localStorage.getItem("auth"))
+            const response = await hospitalLoginService({ email, password });
+            console.log("Res", response);
+            const auth = JSON.parse(localStorage.getItem("auth"));
             console.log(auth.role);
             await setAuth(dispatch, auth);
             console.log(auth.role);
             navigate("/hospital/patients");
           } catch (error) {
-            toast(error.message)
+            toast(error.message);
           }
           break;
         case "Insurance":
           try {
-            const response = await insuranceLoginService({email,password});
-            console.log("Res",response);
+            const response = await insuranceLoginService({ email, password });
+            console.log("Res", response);
+            const auth = JSON.parse(localStorage.getItem("auth"));
+            console.log(auth.role);
+            await setAuth(dispatch, auth);
+            console.log(auth.role);
+            navigate("/insurance/patients");
           } catch (error) {
-            toast(error.message)
+            toast(error.message);
           }
           break;
         default:
@@ -104,6 +128,32 @@ function Illustration({ role, title }) {
       : role === "Hospital"
       ? hospitalBG
       : insuranceBG;
+
+  const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
+
+  const configsButton = (
+    <ArgonBox
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      width="3.5rem"
+      height="3.5rem"
+      bgColor="white"
+      shadow="sm"
+      borderRadius="50%"
+      position="fixed"
+      right="2rem"
+      bottom="2rem"
+      zIndex={99}
+      color="dark"
+      sx={{ cursor: "pointer" }}
+      onClick={handleConfiguratorOpen}
+    >
+      <Icon fontSize="default" color="inherit">
+        settings
+      </Icon>
+    </ArgonBox>
+  );
 
   return (
     <IllustrationLayout
@@ -162,6 +212,8 @@ function Illustration({ role, title }) {
         pauseOnHover
         theme="dark"
       />
+      <Configurator />
+      {configsButton}
     </IllustrationLayout>
   );
 }

@@ -31,7 +31,6 @@ import createCache from "@emotion/cache";
 // Argon Dashboard 2 MUI routes
 import routes from "routes";
 import { hospitalRoutes, adminRoutes } from "routes";
-
 // Argon Dashboard 2 MUI contexts
 import { useArgonController, setMiniSidenav, setOpenConfigurator } from "context";
 
@@ -43,6 +42,9 @@ import brandDark from "assets/images/logo-ct-dark.png";
 import "assets/css/nucleo-icons.css";
 import "assets/css/nucleo-svg.css";
 import { Handshake } from "@mui/icons-material";
+import { insuranceRoutes } from "routes";
+import { patientRoutes } from "routes";
+
 
 export default function App() {
   const [controller, dispatch] = useArgonController();
@@ -69,6 +71,12 @@ export default function App() {
     } else if (auth.role === "hospital") {
       setTmpRoutes(hospitalRoutes);
       setBrandName("Hospital Dash");
+    }else if (auth.role === "insurance") {
+      setTmpRoutes(insuranceRoutes);
+      setBrandName("Insurance Dash");
+    }else if (auth.role === "patient") {
+      setTmpRoutes(patientRoutes);
+      setBrandName("Patient Profile");
     }
   }, [auth]);
 
@@ -169,6 +177,19 @@ export default function App() {
         )}
 
         <Routes>
+
+          {/* if admin is logged in only admin routes are enabled */}
+          {auth.role === "hospital" && getRoutes(hospitalRoutes)}
+
+          {/* if hospital is logged in only hospital routes are enabled */}
+          {auth.role === "admin" && getRoutes(adminRoutes)}
+
+          {/* if hospital is logged in only hospital routes are enabled */}
+          {auth.role === "insurance" && getRoutes(insuranceRoutes)}
+
+          {/* if hospital is logged in only hospital routes are enabled */}
+          {auth.role === "patient" && getRoutes(patientRoutes)}
+
           <Route
             exact
             path="/authentication/admin/sign-in"
@@ -194,6 +215,7 @@ export default function App() {
             key="hospital-sign-in"
           />
           <Route exact path="/sign-in" element={<SignIn />} key="admin-sign-in" />
+          
           <Route exact path="/sign-up" element={<SignUp />} key="admin-sign-up" />
 
           {/* if admin is logged in only admin routes are enabled */}
@@ -203,12 +225,17 @@ export default function App() {
           {auth.role === "admin" && getRoutes(adminRoutes)}
 
           {/* if admin is logged in and any random route is accessed the page is redirected to admin dashboard */}
-          {auth.role === "admin" && <Route path="*" element={<Navigate to="/admin/hospital" />} />}
+          {auth.role === "admin" && <Route path="*" element={<Navigate to="/admin/hospitals" />} />}
 
-          {/* if admin is logged in and any random route is accessed the page is redirected to admin dashboard */}
-          {auth.role === "hospital" && (
-            <Route path="*" element={<Navigate to="/hospital/patients" />} />
-          )}
+          {/* if hospital is logged in and any random route is accessed the page is redirected to hospital dashboard */}
+          {auth.role === "hospital" && <Route path="*" element={<Navigate to="/hospital/patients" />} />}
+
+          {/* if insurance is logged in and any random route is accessed the page is redirected to insurance dashboard */}
+          {auth.role === "insurance" && <Route path="*" element={<Navigate to="/insurance/patients" />} />}
+
+          {/* if insurance is logged in and any random route is accessed the page is redirected to insurance dashboard */}
+          {auth.role === "patient" && <Route path="*" element={<Navigate to="/patient/profile" />} />}
+          
         </Routes>
       </>
     </ThemeProvider>

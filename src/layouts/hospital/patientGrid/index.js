@@ -26,7 +26,7 @@ function PatientGrid() {
       <DashboardNavbar />
       <ArgonBox py={3}>
         <ArgonBox mb={3}>
-          <Card style={{ height: "80vh", overflowY: "scroll" }}>
+          <Card>
             <Stack direction="row" justifyContent="space-between">
               <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
                 <ArgonTypography variant="h6">Patient List</ArgonTypography>
@@ -55,6 +55,7 @@ function PatientGrid() {
                       `${borderWidth[1]} solid ${borderColor}`,
                   },
                 },
+                height: "75vh", overflowY: "scroll"
               }}
             >
               <Table columns={columns} rows={rows} />
@@ -63,7 +64,6 @@ function PatientGrid() {
         </ArgonBox>
       </ArgonBox>
       <AddPatientModal open={open} setOpen={setOpen} />
-      <Footer />
     </DashboardLayout>
   );
 }

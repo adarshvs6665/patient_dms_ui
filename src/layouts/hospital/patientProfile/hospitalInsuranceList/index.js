@@ -51,8 +51,8 @@ function HospitalInsuranceList({ title, list }) {
   ));
 
   return (
-    <Card sx={{ height: "50vh", overflowY:"scroll" }}>
-      <ArgonBox pt={2} px={2} display="flex" justifyContent="space-between" alignItems="center">
+    <Card>
+      <ArgonBox pt={2} px={2} pb={2} display="flex" justifyContent="space-between" alignItems="center">
         <ArgonTypography variant="h6" fontWeight="medium" textTransform="capitalize">
           {title}
         </ArgonTypography>
@@ -73,7 +73,7 @@ function HospitalInsuranceList({ title, list }) {
           </Tooltip>
         </ArgonTypography>
       </ArgonBox>
-      <ArgonBox p={2}>
+      <ArgonBox p={2}  sx={{ height: "40vh", overflowY:"scroll" }}>
         <ArgonBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
           {renderProfiles}
         </ArgonBox>

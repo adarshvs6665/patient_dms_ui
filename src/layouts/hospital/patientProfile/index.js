@@ -14,6 +14,7 @@ import Header from "layouts/hospital/patientProfile/components/Header";
 // Data
 import profilesListData from "layouts/hospital/patientProfile/data/HospitalListData";
 import HospitalInsuranceList from "./hospitalInsuranceList";
+import ReportInformation from "./components/ReportInformation";
 
 
 
@@ -53,9 +54,11 @@ function Overview() {
           <Grid item xs={12} xl={8}>
             <HospitalInsuranceList title="Authorized Hospitals" list={profilesListData} />
           </Grid>
+          <Grid item xs={12} md={12} xl={12}>
+            <ReportInformation/>
+          </Grid>
         </Grid>
       </ArgonBox>
-      <Footer />
     </DashboardLayout>
   );
 }

@@ -31,6 +31,16 @@ function SidenavFooter() {
       setAuth(dispatch, {})
       navigate('authentication/hospital/sign-in')
     }
+    if (auth.role==='insurance'){
+      localStorage.setItem("auth", JSON.stringify({ role: "", id: "" }));
+      setAuth(dispatch, {})
+      navigate('authentication/insurance/sign-in')
+    }
+    if (auth.role==='patient'){
+      localStorage.setItem("auth", JSON.stringify({ role: "", id: "" }));
+      setAuth(dispatch, {})
+      navigate('authentication/patient/sign-in')
+    }
   }
 
 
