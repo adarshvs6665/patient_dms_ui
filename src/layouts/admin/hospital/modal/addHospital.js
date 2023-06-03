@@ -33,7 +33,6 @@ const style = {
   p: 4,
 };
 
-
 export default function AddHospitalModal(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -44,9 +43,7 @@ export default function AddHospitalModal(props) {
   const [wallet, setWallet] = useState("");
   const [unUsedAddresses, setUnUsedAddress] = useState(null);
   const [controller, dispatch] = useArgonController();
-const {
-  auth,
-} = controller;
+  const { auth } = controller;
 
   React.useEffect(() => {
     fetchUnusedAddresses().then((addresses) => {
@@ -54,9 +51,6 @@ const {
     });
   }, []);
 
-  React.useEffect(() => {
-    console.log(unUsedAddresses);
-  }, [unUsedAddresses]);
   const handleClose = () => props.setOpen(false);
 
   const handleSubmit = async () => {
@@ -68,15 +62,15 @@ const {
       state: state,
       phone: phone,
       wallet: wallet,
-      adminId: auth.id
+      adminId: auth.id,
     };
     const response = await adminAddHospital(data);
-    console.log(response)
-    if(response.status==="success"){
+    console.log(response);
+    if (response.status === "success") {
       toast(response.message);
-      setWallet("")
-      props.setOpen(false)
-    }else{
+      setWallet("");
+      props.setOpen(false);
+    } else {
       toast(response.message);
     }
   };

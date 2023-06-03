@@ -17,6 +17,18 @@ import { Icon, Input, Stack } from "@mui/material";
 import { useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
+import { fetchUnusedAddresses } from "services/admin/fetchWalletAddres";
+import { useArgonController } from "context";
+import { ToastContainer, toast } from "react-toastify";
+import { createPatient } from "services/hospital/addPatient";
+
+import dayjs from "dayjs";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -30,18 +42,49 @@ const style = {
 };
 
 export default function AddPatientModal(props) {
-  const [Name, setName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [state, setState] = useState("");
+  const [dob, setDob] = useState(null);
+  const [gender, setGender] = useState("");
   const [phone, setPhone] = useState("");
-  const [wallet, setWallet] = useState("0xe99E8bD7eed9Aa2CDFc9cad5681E183b5282cDed");
+  const [wallet, setWallet] = useState("");
+  const [unUsedAddresses, setUnUsedAddress] = useState(null);
+  const [controller, dispatch] = useArgonController();
+  const { auth } = controller;
+
+  React.useEffect(() => {
+    fetchUnusedAddresses().then((addresses) => {
+      setUnUsedAddress(addresses.data.addresses);
+    });
+  }, []);
 
   const handleClose = () => props.setOpen(false);
 
-  const handleSubmit = () => {
-    alert("Clicked");
+  const handleSubmit = async () => {
+    const data = {
+      name: name,
+      email: email,
+      password: password,
+      address: address,
+      state: state,
+      phone: phone,
+      gender:gender,
+      dob:dob,
+      wallet: wallet,
+      hospitalId: auth.id,
+    };
+    const response = await createPatient(data);
+    console.log(response);
+    if (response.status === "success") {
+      toast(response.message);
+      setWallet("");
+      props.setOpen(false);
+    } else {
+      toast(response.message);
+    }
   };
 
   return (
@@ -54,7 +97,7 @@ export default function AddPatientModal(props) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Add New Patient
+            Enter patient details
           </Typography>
           <ArgonBox component="form" role="form" sx={{ mt: 2 }}>
             <ArgonBox mb={2}>
@@ -117,6 +160,76 @@ export default function AddPatientModal(props) {
                 }}
               />
             </ArgonBox>
+            <ArgonBox mb={2} sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <Select
+                  sx={{
+                    padding: 2,
+                    paddingLeft: 0,
+                    "& .MuiSelect-icon": {
+                      right: 12,
+                      pointerEvents: "none", // Disable pointer events on the icon
+                    },
+                    "& .MuiSelect-root:focus .MuiSelect-icon": {
+                      color: "primary.main", // Change the icon color when the component is focused
+                    },
+                    "& .MuiSelect-root.Mui-disabled .MuiSelect-icon": {
+                      color: "rgba(0, 0, 0, 0.26)", // Change the icon color when the component is disabled
+                    },
+                  }}
+                  displayEmpty // Display the selected value when no option is selected
+                  IconComponent={ArrowDropDownIcon}
+                  value={gender}
+                  onChange={(event) => {
+                    setGender(event.target.value);
+                  }}
+                >
+                  <MenuItem sx={{ width: "100%" }} value={""}>
+                    Gender
+                  </MenuItem>
+                  <MenuItem sx={{ width: "100%" }} value={"male"}>
+                    Male
+                  </MenuItem>
+                  <MenuItem sx={{ width: "100%" }} value={"female"}>
+                    Female
+                  </MenuItem>
+                  <MenuItem sx={{ width: "100%" }} value={"other"}>
+                    Other
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </ArgonBox>
+            <ArgonBox mb={2}>
+              <Typography
+                sx={{
+                  textAlign: "left",
+                  paddingLeft: 0,
+                  fontSize: ".8rem",
+                }}
+              >
+                &nbsp;Date of birth
+              </Typography>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["DatePicker"]}>
+                  <DesktopDatePicker
+                    defaultValue={dayjs()}
+                    sx={{
+                      width: "100%",
+                      "& .MuiInputBase-root": {
+                        display: "flex",
+                        justifyContent: "space-between",
+                        paddingLeft: 0,
+                        paddingTop: 1.5,
+                        paddingBottom: 1.5,
+                      },
+                    }}
+                    onChange={(dob) => {
+                      setDob(dob.format("DD/MM/YYYY").toString());
+                    }}
+                  />
+                </DemoContainer>
+              </LocalizationProvider>
+            </ArgonBox>
             <ArgonBox sx={{ minWidth: 120 }}>
               <FormControl fullWidth>
                 <Select
@@ -142,42 +255,46 @@ export default function AddPatientModal(props) {
                     setWallet(event.target.value);
                   }}
                 >
-                  <MenuItem value={"0xe99E8bD7eed9Aa2CDFc9cad5681E183b5282cDed"}>
-                    0xe99E8bD7eed9Aa2CDFc9cad5681E183b5282cDed
+                  <MenuItem sx={{ width: "100%" }} value={""}>
+                    Select Address
                   </MenuItem>
-                  <MenuItem value={"0xe99E8bD7DFc9c183b52adeed9Aa2C5681E82cDed"}>
-                    0xe99E8bD7DFc9c183b52adeed9Aa2C5681E82cDed
-                  </MenuItem>
-                  <MenuItem value={"0xe99E8bD7ee9c183b52ad5681E82cDedd9Aa2CDFc"}>
-                    0xe99E8bD7ee9c183b52ad5681E82cDedd9Aa2CDFc
-                  </MenuItem>
+
+                  {unUsedAddresses &&
+                    unUsedAddresses.map((item, key) => {
+                      return (
+                        <MenuItem sx={{ width: "100%" }} key={key} value={item}>
+                          {item}
+                        </MenuItem>
+                      );
+                    })}
                 </Select>
               </FormControl>
             </ArgonBox>
 
-            <ArgonBox mb={2}>
-              {/* <ArgonInput
-                type="select"
-                placeholder="Wallet"
-                size="large"
-                onChange={(event) => {
-                  setWallet(event.target.value);
-                }}
-              />
-               */}
-            </ArgonBox>
             <Stack mt={4} mb={1} direction={"row"} gap={2}>
               <ArgonButton color="secondary" size="medium" onClick={handleClose} fullWidth>
                 Cancel
               </ArgonButton>
               <ArgonButton color="dark" size="medium" onClick={handleSubmit} fullWidth>
-                Create Hospital
+                Create Patient
               </ArgonButton>
             </Stack>
             <ArgonBox mt={3} textAlign="center"></ArgonBox>
           </ArgonBox>
         </Box>
       </Modal>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 }

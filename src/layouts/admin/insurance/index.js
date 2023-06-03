@@ -13,19 +13,30 @@ import Table from "examples/Tables/Table";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import { Stack } from "@mui/material";
 import ArgonButton from "components/ArgonButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import insuranceTableData from "./data/insuranceTableData";
 import AddInsuranceModal from "./modal/addInsurance";
+import { fetchAllInsurances } from "services/admin/fetchAllInsurance";
 
 function Insurance() {
-  const { columns, rows } = insuranceTableData;
+  const [columns, setColumns] = useState([]);
+  const [rows, setRows] = useState([]);
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    fetchAllInsurances().then((response) => {
+      const { columns, rows } = insuranceTableData(response.data);
+      setColumns(columns);
+      setRows(rows);
+    });
+  }, [open]);
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <ArgonBox py={3}>
         <ArgonBox mb={3}>
-          <Card style={{ height: "80vh", overflowY: "scroll" }}>
+          <Card style={{ height: "85vh", overflowY: "scroll" }}>
             <Stack direction="row" justifyContent="space-between">
               <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
                 <ArgonTypography variant="h6">Insurance Company List</ArgonTypography>
@@ -62,7 +73,6 @@ function Insurance() {
         </ArgonBox>
       </ArgonBox>
       <AddInsuranceModal open={open} setOpen={setOpen} />
-      <Footer />
     </DashboardLayout>
   );
 }

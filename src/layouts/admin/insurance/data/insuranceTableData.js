@@ -25,167 +25,49 @@ function Insurance({ image, name, email }) {
   );
 }
 
-const insuranceTableData = {
-  columns: [
+const insuranceTableData = (insurancesArray) => {
+  const columns = [
     { name: "insurance", align: "left" },
     { name: "phone", align: "center" },
     { name: "state", align: "center" },
     { name: "wallet", align: "center" },
     { name: "date", align: "left" },
-  ],
+  ]
 
-  rows: [
-    {
+  const rows = insurancesArray.map((insurance, key) => {
+    return {
       insurance: (
         <Insurance
           image={insuranceCompanyImageUrl}
-          name="Insurance Name"
+          name={insurance.name}
           email="insurance@abccom"
         />
       ),
       phone: (
         <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          9988776655
+          {insurance.mobile}
         </ArgonTypography>
       ),
       state: (
         <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          Kerala
+          {insurance.state}
         </ArgonTypography>
       ),
 
       wallet: (
         <ArgonTypography variant="caption" color="text" fontWeight="medium">
-          0x37BaefDc23fd0ee801F2eBc40eecf0C3297faD26
+          {insurance.wallet}
         </ArgonTypography>
       ),
       date: (
         <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          11/01/19
+          {(insurance.createdAt).substring(0, 10)}
         </ArgonTypography>
       ),
-    },
-    {
-      insurance: (
-        <Insurance
-          image={insuranceCompanyImageUrl}
-          name="Insurance Name"
-          email="insurance@abccom"
-        />
-      ),
-      phone: (
-        <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          9988776655
-        </ArgonTypography>
-      ),
-      state: (
-        <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          Kerala
-        </ArgonTypography>
-      ),
-
-      wallet: (
-        <ArgonTypography variant="caption" color="text" fontWeight="medium">
-          0x37BaefDc23fd0ee801F2eBc40eecf0C3297faD26
-        </ArgonTypography>
-      ),
-      date: (
-        <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          11/01/19
-        </ArgonTypography>
-      ),
-    },
-    {
-      insurance: (
-        <Insurance
-          image={insuranceCompanyImageUrl}
-          name="Insurance Name"
-          email="insurance@abccom"
-        />
-      ),
-      phone: (
-        <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          9988776655
-        </ArgonTypography>
-      ),
-      state: (
-        <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          Kerala
-        </ArgonTypography>
-      ),
-
-      wallet: (
-        <ArgonTypography variant="caption" color="text" fontWeight="medium">
-          0x37BaefDc23fd0ee801F2eBc40eecf0C3297faD26
-        </ArgonTypography>
-      ),
-      date: (
-        <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          11/01/19
-        </ArgonTypography>
-      ),
-    },
-    {
-      insurance: (
-        <Insurance
-          image={insuranceCompanyImageUrl}
-          name="Insurance Name"
-          email="insurance@abccom"
-        />
-      ),
-      phone: (
-        <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          9988776655
-        </ArgonTypography>
-      ),
-      state: (
-        <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          Kerala
-        </ArgonTypography>
-      ),
-
-      wallet: (
-        <ArgonTypography variant="caption" color="text" fontWeight="medium">
-          0x37BaefDc23fd0ee801F2eBc40eecf0C3297faD26
-        </ArgonTypography>
-      ),
-      date: (
-        <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          11/01/19
-        </ArgonTypography>
-      ),
-    },
-    {
-      insurance: (
-        <Insurance
-          image={insuranceCompanyImageUrl}
-          name="Insurance Name"
-          email="insurance@abccom"
-        />
-      ),
-      phone: (
-        <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          9988776655
-        </ArgonTypography>
-      ),
-      state: (
-        <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          Kerala
-        </ArgonTypography>
-      ),
-
-      wallet: (
-        <ArgonTypography variant="caption" color="text" fontWeight="medium">
-          0x37BaefDc23fd0ee801F2eBc40eecf0C3297faD26
-        </ArgonTypography>
-      ),
-      date: (
-        <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          11/01/19
-        </ArgonTypography>
-      ),
-    },
-  ],
+    }
+})
+  
+  return {columns,rows}
 };
 
 export default insuranceTableData;

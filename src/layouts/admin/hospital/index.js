@@ -16,17 +16,28 @@ import hospitalTableData from "./data/hospitalTableData";
 import { Stack } from "@mui/material";
 import ArgonButton from "components/ArgonButton";
 import AddHospitalModal from "./modal/addHospital";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { fetchAllHospitals } from "services/admin/fetchAllHospitals";
 
 function Hospital() {
-  const { columns, rows } = hospitalTableData;
+  const [columns, setColumns] = useState([]);
+  const [rows, setRows] = useState([]);
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    fetchAllHospitals().then((response) => {
+      const { columns, rows } = hospitalTableData(response.data);
+      setColumns(columns);
+      setRows(rows);
+    });
+  }, [open]);
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
       <ArgonBox py={3}>
         <ArgonBox mb={3}>
-          <Card style={{ height: "80vh", overflowY: "scroll" }}>
+          <Card style={{ height: "85vh", overflowY: "scroll" }}>
             <Stack direction="row" justifyContent="space-between">
               <ArgonBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
                 <ArgonTypography variant="h6">Hospital List</ArgonTypography>
@@ -63,7 +74,6 @@ function Hospital() {
         </ArgonBox>
       </ArgonBox>
       <AddHospitalModal open={open} setOpen={setOpen} />
-      <Footer />
     </DashboardLayout>
   );
 }
