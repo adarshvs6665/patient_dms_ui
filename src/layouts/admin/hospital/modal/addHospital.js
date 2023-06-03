@@ -16,6 +16,10 @@ import ArgonTypography from "components/ArgonTypography";
 import { Icon, Input, Stack } from "@mui/material";
 import { useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { fetchUnusedAddresses } from "services/admin/fetchWalletAddres";
+import { useArgonController } from "context";
+import { adminAddHospital } from "services/admin/addHospital";
+import { ToastContainer, toast } from "react-toastify";
 
 const style = {
   position: "absolute",
@@ -29,19 +33,52 @@ const style = {
   p: 4,
 };
 
+
 export default function AddHospitalModal(props) {
-  const [Name, setName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [state, setState] = useState("");
   const [phone, setPhone] = useState("");
-  const [wallet, setWallet] = useState("0xe99E8bD7eed9Aa2CDFc9cad5681E183b5282cDed");
+  const [wallet, setWallet] = useState("");
+  const [unUsedAddresses, setUnUsedAddress] = useState(null);
+  const [controller, dispatch] = useArgonController();
+const {
+  auth,
+} = controller;
 
+  React.useEffect(() => {
+    fetchUnusedAddresses().then((addresses) => {
+      setUnUsedAddress(addresses.data.addresses);
+    });
+  }, []);
+
+  React.useEffect(() => {
+    console.log(unUsedAddresses);
+  }, [unUsedAddresses]);
   const handleClose = () => props.setOpen(false);
 
-  const handleSubmit = () => {
-    alert("Clicked");
+  const handleSubmit = async () => {
+    const data = {
+      name: name,
+      email: email,
+      password: password,
+      address: address,
+      state: state,
+      phone: phone,
+      wallet: wallet,
+      adminId: auth.id
+    };
+    const response = await adminAddHospital(data);
+    console.log(response)
+    if(response.status==="success"){
+      toast(response.message);
+      setWallet("")
+      props.setOpen(false)
+    }else{
+      toast(response.message);
+    }
   };
 
   return (
@@ -118,7 +155,7 @@ export default function AddHospitalModal(props) {
               />
             </ArgonBox>
             <ArgonBox sx={{ minWidth: 120 }}>
-              <FormControl fullWidth>
+              <FormControl fullWidth size="small">
                 <Select
                   sx={{
                     padding: 2,
@@ -136,21 +173,24 @@ export default function AddHospitalModal(props) {
                   }}
                   displayEmpty // Display the selected value when no option is selected
                   IconComponent={ArrowDropDownIcon}
-                  value={wallet}
+                  value={wallet && wallet}
                   onChange={(event) => {
                     console.log(event.target.value);
                     setWallet(event.target.value);
                   }}
                 >
-                  <MenuItem value={"0xe99E8bD7eed9Aa2CDFc9cad5681E183b5282cDed"}>
-                    0xe99E8bD7eed9Aa2CDFc9cad5681E183b5282cDed
+                  <MenuItem sx={{ width: "35vw" }} value={""}>
+                    Select Address
                   </MenuItem>
-                  <MenuItem value={"0xe99E8bD7DFc9c183b52adeed9Aa2C5681E82cDed"}>
-                    0xe99E8bD7DFc9c183b52adeed9Aa2C5681E82cDed
-                  </MenuItem>
-                  <MenuItem value={"0xe99E8bD7ee9c183b52ad5681E82cDedd9Aa2CDFc"}>
-                    0xe99E8bD7ee9c183b52ad5681E82cDedd9Aa2CDFc
-                  </MenuItem>
+
+                  {unUsedAddresses &&
+                    unUsedAddresses.map((item, key) => {
+                      return (
+                        <MenuItem sx={{ width: "35vw" }} key={key} value={item}>
+                          {item}
+                        </MenuItem>
+                      );
+                    })}
                 </Select>
               </FormControl>
             </ArgonBox>
@@ -178,6 +218,18 @@ export default function AddHospitalModal(props) {
           </ArgonBox>
         </Box>
       </Modal>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 }

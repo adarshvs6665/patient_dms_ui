@@ -12,10 +12,13 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
-
+import { ToastContainer, toast } from "react-toastify";
+import { useArgonController } from "context";
 
 import { Stack } from "@mui/material";
 import { useState } from "react";
+import { adminAddInsurance } from "services/admin/addInsurance";
+import { fetchUnusedAddresses } from "services/admin/fetchWalletAddres";
 
 const style = {
   position: "absolute",
@@ -30,18 +33,49 @@ const style = {
 };
 
 export default function AddInsuranceModal(props) {
-  const [Name, setName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [state, setState] = useState("");
   const [phone, setPhone] = useState("");
-  const [wallet, setWallet] = useState("0xe99E8bD7eed9Aa2CDFc9cad5681E183b5282cDed");
+  const [wallet, setWallet] = useState("");
+  const [unUsedAddresses, setUnUsedAddress] = useState(null);
+  const [controller, dispatch] = useArgonController();
+  
+
+  const {
+    auth,
+  } = controller;
+  
+    React.useEffect(() => {
+      fetchUnusedAddresses().then((addresses) => {
+        setUnUsedAddress(addresses.data.addresses);
+      });
+    }, []);
 
   const handleClose = () => props.setOpen(false);
 
-  const handleSubmit = () => {
-    alert("Clicked");
+  const handleSubmit = async () => {
+    const data = {
+      name: name,
+      email: email,
+      password: password,
+      address: address,
+      state: state,
+      phone: phone,
+      wallet: wallet,
+      adminId: auth.id
+    };
+    const response = await adminAddInsurance(data);
+    console.log(response)
+    if(response.status==="success"){
+      toast(response.message);
+      setWallet("")
+      props.setOpen(false)
+    }else{
+      toast(response.message);
+    }
   };
 
   return (
@@ -134,22 +168,25 @@ export default function AddInsuranceModal(props) {
                       color: "rgba(0, 0, 0, 0.26)",
                     },
                   }}
-                  displayEmpty 
+                  displayEmpty
                   value={wallet}
                   onChange={(event) => {
                     console.log(event.target.value);
                     setWallet(event.target.value);
                   }}
                 >
-                  <MenuItem value={"0xe99E8bD7eed9Aa2CDFc9cad5681E183b5282cDed"}>
-                    0xe99E8bD7eed9Aa2CDFc9cad5681E183b5282cDed
+                  <MenuItem sx={{ width: "35vw" }} value={""}>
+                    Select Address
                   </MenuItem>
-                  <MenuItem value={"0xe99E8bD7DFc9c183b52adeed9Aa2C5681E82cDed"}>
-                    0xe99E8bD7DFc9c183b52adeed9Aa2C5681E82cDed
-                  </MenuItem>
-                  <MenuItem value={"0xe99E8bD7ee9c183b52ad5681E82cDedd9Aa2CDFc"}>
-                    0xe99E8bD7ee9c183b52ad5681E82cDedd9Aa2CDFc
-                  </MenuItem>
+
+                  {unUsedAddresses &&
+                    unUsedAddresses.map((item, key) => {
+                      return (
+                        <MenuItem sx={{ width: "35vw" }} key={key} value={item}>
+                          {item}
+                        </MenuItem>
+                      );
+                    })}
                 </Select>
               </FormControl>
             </ArgonBox>
@@ -165,6 +202,18 @@ export default function AddInsuranceModal(props) {
           </ArgonBox>
         </Box>
       </Modal>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 }
