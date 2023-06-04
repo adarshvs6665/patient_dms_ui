@@ -20,14 +20,14 @@ const hospitalImageUrl =
 const insuranceCompanyImageUrl =
   "https://img.freepik.com/premium-vector/concept-vector-illustration-life-insurance-protection-health-life-flat-vector-illustration_98702-1374.jpg";
 
-function HospitalInsuranceList({ title, list }) {
+function HospitalInsuranceList({ title, list, type }) {
 
   const [open, setOpen] = useState(false);
 
   const renderProfiles = list.map(({ name, email }) => (
     <ArgonBox key={name} component="li" display="flex" alignItems="center" py={1} mb={1}>
       <ArgonBox mr={2}>
-        <ArgonAvatar src={hospitalImageUrl} alt="something here" variant="rounded" shadow="md" />
+        <ArgonAvatar src={type === "hospital" ? hospitalImageUrl : insuranceCompanyImageUrl} alt="something here" variant="rounded" shadow="md" />
       </ArgonBox>
       <ArgonBox
         display="flex"
@@ -86,5 +86,6 @@ function HospitalInsuranceList({ title, list }) {
 HospitalInsuranceList.propTypes = {
   title: PropTypes.string.isRequired,
   list: PropTypes.arrayOf(PropTypes.object).isRequired,
+  type:PropTypes.string.isRequired
 };
 export default HospitalInsuranceList;

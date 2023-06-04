@@ -32,12 +32,13 @@ const insuranceTableData = (insurancesArray) => {
     { name: "state", align: "center" },
     { name: "wallet", align: "center" },
     { name: "date", align: "left" },
-  ]
+  ];
 
   const rows = insurancesArray.map((insurance, key) => {
     return {
       insurance: (
         <Insurance
+          key={key}
           image={insuranceCompanyImageUrl}
           name={insurance.name}
           email="insurance@abccom"
@@ -61,13 +62,13 @@ const insuranceTableData = (insurancesArray) => {
       ),
       date: (
         <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          {(insurance.createdAt).substring(0, 10)}
+          {insurance.createdAt.substring(0, 10)}
         </ArgonTypography>
       ),
-    }
-})
-  
-  return {columns,rows}
+    };
+  });
+
+  return { columns, rows };
 };
 
 export default insuranceTableData;

@@ -12,15 +12,30 @@ import Table from "examples/Tables/Table";
 
 // Data
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import hospitalTableData from "./data/patientTableData";
 import { Stack } from "@mui/material";
 import ArgonButton from "components/ArgonButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddPatientModal from "./modal/addPatient";
+import { fetchAuthorisedPatients } from "services/hospital/fetchAuthorisedPatients";
+import { useArgonController } from "context";
+import patientData from "./data/patientTableData";
 
 function PatientGrid() {
-  const { columns, rows } = hospitalTableData;
+  const [columns, setColumns] = useState([]);
+  const [rows, setRows] = useState([]);
   const [open, setOpen] = useState(false);
+  const [controller, dispatch] = useArgonController();
+  const { auth } = controller;
+  
+
+  useEffect(() => {
+    fetchAuthorisedPatients(auth.id).then((response) => {
+      const { columns, rows } = patientData(response.data.patients);
+      setColumns(columns);
+      setRows(rows);
+    });
+  }, [open]);
+
   return (
     <DashboardLayout>
       <DashboardNavbar />

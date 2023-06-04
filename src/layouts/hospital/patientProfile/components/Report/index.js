@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -12,7 +13,17 @@ import ArgonButton from "components/ArgonButton";
 // Argon Dashboard 2 MUI contexts
 import { useArgonController } from "context";
 
-function Report({ name, company, email, vat, noGutter }) {
+function Report({
+  dateOfVisit,
+  causeOfVisit,
+  condition,
+  description,
+  doctor,
+  medication,
+  hospitalName,
+  reportId,
+  noGutter
+}) {
   const [controller] = useArgonController();
   const { darkMode } = controller;
 
@@ -39,7 +50,7 @@ function Report({ name, company, email, vat, noGutter }) {
           mb={1}
         >
           <ArgonTypography variant="button" fontWeight="medium" textTransform="capitalize">
-            {name}
+            {causeOfVisit}
           </ArgonTypography>
 
           <ArgonBox
@@ -60,26 +71,68 @@ function Report({ name, company, email, vat, noGutter }) {
         </ArgonBox>
         <ArgonBox mb={1} lineHeight={0}>
           <ArgonTypography variant="caption" color="text">
-            Company Name:&nbsp;&nbsp;&nbsp;
+            Report Id:&nbsp;&nbsp;&nbsp;
             <ArgonTypography variant="caption" fontWeight="medium" textTransform="capitalize">
-              {company}
+              {reportId}
             </ArgonTypography>
           </ArgonTypography>
         </ArgonBox>
         <ArgonBox mb={1} lineHeight={0}>
           <ArgonTypography variant="caption" color="text">
-            Email Address:&nbsp;&nbsp;&nbsp;
-            <ArgonTypography variant="caption" fontWeight="medium">
-              {email}
+            Cause Of Visit:&nbsp;&nbsp;&nbsp;
+            <ArgonTypography variant="caption" fontWeight="medium" textTransform="capitalize">
+              {causeOfVisit}
             </ArgonTypography>
           </ArgonTypography>
         </ArgonBox>
-        <ArgonTypography variant="caption" color="text">
-          VAT Number:&nbsp;&nbsp;&nbsp;
-          <ArgonTypography variant="caption" fontWeight="medium">
-            {vat}
+        <ArgonBox mb={1} lineHeight={0}>
+          <ArgonTypography variant="caption" color="text">
+            Date Of Visit:&nbsp;&nbsp;&nbsp;
+            <ArgonTypography variant="caption" fontWeight="medium">
+              {dateOfVisit}
+            </ArgonTypography>
           </ArgonTypography>
-        </ArgonTypography>
+        </ArgonBox>
+        <ArgonBox mb={1} lineHeight={0}>
+          <ArgonTypography variant="caption" color="text">
+            Condition:&nbsp;&nbsp;&nbsp;
+            <ArgonTypography variant="caption" fontWeight="medium">
+              {condition}
+            </ArgonTypography>
+          </ArgonTypography>
+        </ArgonBox>
+        <ArgonBox mb={1} lineHeight={0}>
+          <ArgonTypography variant="caption" color="text">
+            Description:&nbsp;&nbsp;&nbsp;
+            <ArgonTypography variant="caption" fontWeight="medium">
+              {description}
+            </ArgonTypography>
+          </ArgonTypography>
+        </ArgonBox>
+        <ArgonBox mb={1} lineHeight={0}>
+          <ArgonTypography variant="caption" color="text">
+            Medication:&nbsp;&nbsp;&nbsp;
+            <ArgonTypography variant="caption" fontWeight="medium">
+              {medication}
+            </ArgonTypography>
+          </ArgonTypography>
+        </ArgonBox>
+        <ArgonBox mb={1} lineHeight={0}>
+          <ArgonTypography variant="caption" color="text">
+            Doctor:&nbsp;&nbsp;&nbsp;
+            <ArgonTypography variant="caption" fontWeight="medium">
+              {doctor}
+            </ArgonTypography>
+          </ArgonTypography>
+        </ArgonBox>
+        <ArgonBox mb={1} lineHeight={0}>
+          <ArgonTypography variant="caption" color="text">
+            Hospital Name:&nbsp;&nbsp;&nbsp;
+            <ArgonTypography variant="caption" fontWeight="medium">
+              {hospitalName}
+            </ArgonTypography>
+          </ArgonTypography>
+        </ArgonBox>
       </ArgonBox>
     </ArgonBox>
   );
@@ -91,12 +144,6 @@ Report.defaultProps = {
 };
 
 // Typechecking props for the Report
-Report.propTypes = {
-  name: PropTypes.string.isRequired,
-  company: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  vat: PropTypes.string.isRequired,
-  noGutter: PropTypes.bool,
-};
+
 
 export default Report;
