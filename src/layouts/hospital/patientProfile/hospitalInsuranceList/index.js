@@ -1,4 +1,5 @@
 // react-routers components
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 
 // prop-types is library for typechecking of props
@@ -14,15 +15,13 @@ import ArgonAvatar from "components/ArgonAvatar";
 import ArgonButton from "components/ArgonButton";
 import { Icon, Tooltip } from "@mui/material";
 import { useState } from "react";
-import AssignHospitalInsuranceModal from "../modal/assignHospitalInsurance";
+import AssignHospitalInsuranceModal from "layouts/hospital/patientProfile/components/modal/assignHospitalInsurance";
 const hospitalImageUrl =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYhdQu0h19z4DvCi74Fgul3jX3tNL6QqQYaqQwwoEu-Uz1oP-XKUopb7teZoLQjGI7HDp6XwXEPyE&usqp=CAU&ec=48665701";
 const insuranceCompanyImageUrl =
   "https://img.freepik.com/premium-vector/concept-vector-illustration-life-insurance-protection-health-life-flat-vector-illustration_98702-1374.jpg";
 
-function HospitalInsuranceList({ title, list, type }) {
-
-  const [open, setOpen] = useState(false);
+function HospitalInsuranceList({ title, list, type, open,setOpen }) {
 
   const renderProfiles = list.map(({ name, email }) => (
     <ArgonBox key={name} component="li" display="flex" alignItems="center" py={1} mb={1}>

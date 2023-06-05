@@ -28,6 +28,8 @@ const bgImage =
 
 function Overview() {
   const { id } = useParams();
+  const [open, setOpen] = useState(false);
+  const [openReport, setOpenReport] = useState(false);
   const [pateientProfile, setPateientProfile] = useState({});
   const [reportType, setReportType] = useState("hospital");
   const [hospitalListData, setHospitalListData] = useState([]);
@@ -47,10 +49,13 @@ function Overview() {
     fetchAuthorisedInsurances(id, auth.id).then((response) => {
       setInsuranceListData(response.data.authorizedInsuranceCompanies);
     });
+  }, [open]);
+
+  useEffect(() => {
     fetchPatientReports(id, auth.id).then((response) => {
       setPatientReports(response.data.reports);
     });
-  }, []);
+  }, [openReport]);
 
   return (
     <DashboardLayout
@@ -85,10 +90,16 @@ function Overview() {
               title={reportType === "hospital" ? "Authorized Hospitals" : "Authorized Insurances"}
               list={reportType === "hospital" ? hospitalListData : insuranceListData}
               type={reportType}
+              open={open}
+              setOpen={setOpen}
             />
           </Grid>
           <Grid item xs={12} md={12} xl={12}>
-            <ReportInformation patientReports={patientReports}/>
+            <ReportInformation
+              patientReports={patientReports}
+              open={openReport}
+              setOpen={setOpenReport}
+            />
           </Grid>
         </Grid>
       </ArgonBox>

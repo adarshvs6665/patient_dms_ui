@@ -17,6 +17,10 @@ import { useArgonController } from "context";
 import { fetchUnAuthorisedHospitals } from "services/hospital/fetchUnauthorisedHospitals";
 import { fetchUnAuthorisedInsurances } from "services/hospital/fetchUnauthorisedInsurance";
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import { authorizeHospital } from "services/hospital/authoriseHospital";
+import { authorizeInsuranceCompany } from "services/hospital/authoriseInsurance";
 
 const style = {
   position: "absolute",
@@ -30,12 +34,12 @@ const style = {
   p: 4,
 };
 
-export default function AssignHospitalInsuranceModal({open,setOpen,type}) {
+export default function AssignHospitalInsuranceModal({ open, setOpen, type }) {
   const [controller, dispatch] = useArgonController();
   const { auth } = controller;
   const { id } = useParams();
 
-  const [wallet, setWallet] = useState("");
+  const [toBeAuthorizedId, setToBeAuthorizedId] = useState("");
   const [insuranceData, setInsuranceData] = useState([]);
   const [hospitalData, setHospitalData] = useState([]);
 
@@ -51,8 +55,44 @@ export default function AssignHospitalInsuranceModal({open,setOpen,type}) {
     });
   }, []);
 
-  const handleSubmit = () => {
-    alert("Clicked 2");
+  useEffect(() => {
+    setToBeAuthorizedId("");
+  }, [type]);
+
+  const handleSubmit = async () => {
+    if (type === "hospital") {
+      const data = {
+        hospitalId: auth.id,
+        patientId: id,
+        hospitalToBeAuthorizedId: toBeAuthorizedId,
+      };
+
+      const response = await authorizeHospital(data);
+      console.log(response);
+      if (response.status === "success") {
+        toast(response.message);
+        setToBeAuthorizedId("");
+        setOpen(false);
+      } else {
+        toast(response.message);
+      }
+    }
+    if (type === "insurance") {
+      const data = {
+        hospitalId: auth.id,
+        patientId: id,
+        insuranceCompanyToBeAuthorizedId: toBeAuthorizedId,
+      };
+      const response = await authorizeInsuranceCompany(data);
+      console.log(response);
+      if (response.status === "success") {
+        toast(response.message);
+        setToBeAuthorizedId("");
+        setOpen(false);
+      } else {
+        toast(response.message);
+      }
+    }
   };
 
   return (
@@ -65,7 +105,7 @@ export default function AssignHospitalInsuranceModal({open,setOpen,type}) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-          {type==="hospital"?("Assign New Hospital"):("Assign New Insurance")}
+            {type === "hospital" ? "Assign New Hospital" : "Assign New Insurance"}
           </Typography>
           <ArgonBox component="form" role="form" sx={{ mt: 2 }}>
             <ArgonBox sx={{ minWidth: 120 }}>
@@ -87,25 +127,27 @@ export default function AssignHospitalInsuranceModal({open,setOpen,type}) {
                   }}
                   displayEmpty // Display the selected value when no option is selected
                   IconComponent={ArrowDropDownIcon}
-                  value={wallet}
+                  value={toBeAuthorizedId}
                   onChange={(event) => {
                     console.log(event.target.value);
-                    setWallet(event.target.value);
+                    setToBeAuthorizedId(event.target.value);
                   }}
                 >
-                  <MenuItem value={""}>{type==="hospital"?("Select Hospital"):("Select Insurance")}</MenuItem>
+                  <MenuItem value={""}>
+                    {type === "hospital" ? "Select Hospital" : "Select Insurance"}
+                  </MenuItem>
 
                   {type === "hospital"
                     ? hospitalData.map((item, key) => {
                         return (
-                          <MenuItem key={key} value={item.wallet}>
+                          <MenuItem key={key} value={item.hospitalId}>
                             {item.name}
                           </MenuItem>
                         );
                       })
                     : insuranceData.map((item, key) => {
                         return (
-                          <MenuItem key={key} value={item.wallet}>
+                          <MenuItem key={key} value={item.insuranceCompanyId}>
                             {item.name}
                           </MenuItem>
                         );
@@ -114,29 +156,31 @@ export default function AssignHospitalInsuranceModal({open,setOpen,type}) {
               </FormControl>
             </ArgonBox>
 
-            <ArgonBox mb={2}>
-              {/* <ArgonInput
-                type="select"
-                placeholder="Wallet"
-                size="large"
-                onChange={(event) => {
-                  setWallet(event.target.value);
-                }}
-              />
-               */}
-            </ArgonBox>
+            <ArgonBox mb={2}></ArgonBox>
             <Stack mt={4} mb={1} direction={"row"} gap={2}>
               <ArgonButton color="secondary" size="medium" onClick={handleClose} fullWidth>
                 Cancel
               </ArgonButton>
               <ArgonButton color="dark" size="medium" onClick={handleSubmit} fullWidth>
-              {type==="hospital"?("Create Hospital"):("Create Insurance")}
+                {type === "hospital" ? "Create Hospital" : "Create Insurance"}
               </ArgonButton>
             </Stack>
             <ArgonBox mt={3} textAlign="center"></ArgonBox>
           </ArgonBox>
         </Box>
       </Modal>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 }
