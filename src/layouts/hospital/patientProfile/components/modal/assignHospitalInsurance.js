@@ -13,6 +13,10 @@ import ArgonButton from "components/ArgonButton";
 import { Stack } from "@mui/material";
 import { useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { useArgonController } from "context";
+import { fetchUnAuthorisedHospitals } from "services/hospital/fetchUnauthorisedHospitals";
+import { fetchUnAuthorisedInsurances } from "services/hospital/fetchUnauthorisedInsurance";
+import { useParams } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -26,27 +30,42 @@ const style = {
   p: 4,
 };
 
-export default function AssignHospitalInsuranceModal(props) {
+export default function AssignHospitalInsuranceModal({open,setOpen,type}) {
+  const [controller, dispatch] = useArgonController();
+  const { auth } = controller;
+  const { id } = useParams();
 
-  const [wallet, setWallet] = useState("0xe99E8bD7eed9Aa2CDFc9cad5681E183b5282cDed");
+  const [wallet, setWallet] = useState("");
+  const [insuranceData, setInsuranceData] = useState([]);
+  const [hospitalData, setHospitalData] = useState([]);
 
-  const handleClose = () => props.setOpen(false);
+  const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    fetchUnAuthorisedInsurances(id, auth.id).then((response) => {
+      setInsuranceData(response.data.unAuthorizedInsuranceCompanies);
+    });
+
+    fetchUnAuthorisedHospitals(id, auth.id).then((response) => {
+      setHospitalData(response.data.unauthorizedHospitals);
+    });
+  }, []);
 
   const handleSubmit = () => {
-    alert("Clicked");
+    alert("Clicked 2");
   };
 
   return (
     <div>
       <Modal
-        open={props.open}
+        open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Assign New Hospital
+          {type==="hospital"?("Assign New Hospital"):("Assign New Insurance")}
           </Typography>
           <ArgonBox component="form" role="form" sx={{ mt: 2 }}>
             <ArgonBox sx={{ minWidth: 120 }}>
@@ -74,15 +93,23 @@ export default function AssignHospitalInsuranceModal(props) {
                     setWallet(event.target.value);
                   }}
                 >
-                  <MenuItem value={"0xe99E8bD7eed9Aa2CDFc9cad5681E183b5282cDed"}>
-                    0xe99E8bD7eed9Aa2CDFc9cad5681E183b5282cDed
-                  </MenuItem>
-                  <MenuItem value={"0xe99E8bD7DFc9c183b52adeed9Aa2C5681E82cDed"}>
-                    0xe99E8bD7DFc9c183b52adeed9Aa2C5681E82cDed
-                  </MenuItem>
-                  <MenuItem value={"0xe99E8bD7ee9c183b52ad5681E82cDedd9Aa2CDFc"}>
-                    0xe99E8bD7ee9c183b52ad5681E82cDedd9Aa2CDFc
-                  </MenuItem>
+                  <MenuItem value={""}>{type==="hospital"?("Select Hospital"):("Select Insurance")}</MenuItem>
+
+                  {type === "hospital"
+                    ? hospitalData.map((item, key) => {
+                        return (
+                          <MenuItem key={key} value={item.wallet}>
+                            {item.name}
+                          </MenuItem>
+                        );
+                      })
+                    : insuranceData.map((item, key) => {
+                        return (
+                          <MenuItem key={key} value={item.wallet}>
+                            {item.name}
+                          </MenuItem>
+                        );
+                      })}
                 </Select>
               </FormControl>
             </ArgonBox>
@@ -103,7 +130,7 @@ export default function AssignHospitalInsuranceModal(props) {
                 Cancel
               </ArgonButton>
               <ArgonButton color="dark" size="medium" onClick={handleSubmit} fullWidth>
-                Create Hospital
+              {type==="hospital"?("Create Hospital"):("Create Insurance")}
               </ArgonButton>
             </Stack>
             <ArgonBox mt={3} textAlign="center"></ArgonBox>

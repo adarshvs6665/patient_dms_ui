@@ -29,7 +29,7 @@ const bgImage =
 function Overview() {
   const { id } = useParams();
   const [pateientProfile, setPateientProfile] = useState({});
-  const [reportType, setReportType] = useState();
+  const [reportType, setReportType] = useState("hospital");
   const [hospitalListData, setHospitalListData] = useState([]);
   const [insuranceListData, setInsuranceListData] = useState([]);
   const [patientReports, setPatientReports] = useState([]);

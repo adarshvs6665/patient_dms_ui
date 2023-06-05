@@ -78,7 +78,7 @@ function HospitalInsuranceList({ title, list, type }) {
           {renderProfiles}
         </ArgonBox>
       </ArgonBox>
-      <AssignHospitalInsuranceModal open={open} setOpen={setOpen}/>
+      <AssignHospitalInsuranceModal open={open} setOpen={setOpen} type={type}/>
     </Card>
   );
 }
