@@ -11,15 +11,27 @@ import Table from "examples/Tables/Table";
 
 // Data
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import hospitalTableData from "./data/patientTableData";
 import { Stack } from "@mui/material";
-import ArgonButton from "components/ArgonButton";
-import { useState } from "react";
-import AddPatientModal from "./modal/addPatient";
+import { useEffect, useState } from "react";
+import { fetchAuthorisedPatients } from "services/insurance/fetchAuthorisedPatients";
+import { useArgonController } from "context";
+import patientData from "./data/patientTableData";
 
-function InsurancePatientGrid() {
-  const { columns, rows } = hospitalTableData;
-  const [open, setOpen] = useState(false);
+function PatientGrid() {
+  const [columns, setColumns] = useState([]);
+  const [rows, setRows] = useState([]);
+  const [controller, dispatch] = useArgonController();
+  const { auth } = controller;
+  
+
+  useEffect(() => {
+    fetchAuthorisedPatients(auth.id).then((response) => {
+      const { columns, rows } = patientData(response.data.patients);
+      setColumns(columns);
+      setRows(rows);
+    });
+  }, []);
+
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -47,9 +59,8 @@ function InsurancePatientGrid() {
           </Card>
         </ArgonBox>
       </ArgonBox>
-      <AddPatientModal open={open} setOpen={setOpen} />
     </DashboardLayout>
   );
 }
 
-export default InsurancePatientGrid;
+export default PatientGrid;

@@ -4,8 +4,9 @@ import ArgonBox from "components/ArgonBox";
 import ArgonTypography from "components/ArgonTypography";
 import ArgonAvatar from "components/ArgonAvatar";
 import ArgonButton from "components/ArgonButton";
+import { useNavigate } from "react-router-dom";
 
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const patientImageUrl = "https://cdn-icons-png.flaticon.com/512/1430/1430453.png";
 
@@ -27,50 +28,58 @@ function NameAndEmail({ image, name, email }) {
   );
 }
 
-function ViewProfile() {
+
+
+function ViewProfile(params) {
+  const navigate = useNavigate();
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    navigate(`/insurance/patient-profile/${params.id}`);
+  };
+
   return (
     <ArgonBox display="flex" alignItems="center" px={1} py={0.5}>
-      <ArgonButton color="dark" size="medium"  fullWidth>
-      <VisibilityIcon /> &nbsp; View
+      <ArgonButton color="dark" size="medium" fullWidth onClick={(event)=>{handleClick(event)}}>
+        <VisibilityIcon /> &nbsp; View
       </ArgonButton>
     </ArgonBox>
   );
 }
 
-const hospitalsData = {
-  columns: [
-    { name: "name and email", align: "left" },
+const patientData = (patientsArray) => {
+  const columns = [
+    { name: "patient", align: "left" },
     { name: "phone", align: "center" },
     { name: "state", align: "center" },
     { name: "wallet", align: "center" },
     { name: "profile", align: "center" },
-  ],
+  ];
 
-  rows: [
-    {
-      "name and email": (
-        <NameAndEmail image={patientImageUrl} name="GG hospital" email="gghospital@gmail.com" />
+  const rows = patientsArray.map((patient, key) => {
+    return {
+      patient: (
+        <NameAndEmail key={key} image={patientImageUrl} name={patient?.name} email={patient?.email} />
       ),
       state: (
         <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          Kerala
+         {patient?.state}
         </ArgonTypography>
       ),
       phone: (
         <ArgonTypography variant="caption" color="secondary" fontWeight="medium">
-          8894673328
+         {patient?.phone}
         </ArgonTypography>
       ),
       wallet: (
         <ArgonTypography variant="caption" color="text" fontWeight="medium">
-          0x37BaefDc23fd0ee801F2eBc40eecf0C3297faD26
+          {patient?.wallet}
         </ArgonTypography>
       ),
-      profile: (
-        <ViewProfile/>
-      ),
-    },
-  ],
+      profile: (<ViewProfile id={patient?.patientId} />),
+    };
+  });
+  return { columns, rows };
 };
 
-export default hospitalsData;
+export default patientData;

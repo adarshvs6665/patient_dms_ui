@@ -10,8 +10,8 @@ import Hospital from "layouts/admin/hospital";
 import Insurance from "layouts/admin/insurance";
 import PatientGrid from "layouts/hospital/patientGrid";
 import PatientProfile from "layouts/hospital/patientProfile";
-import InsurancePatientGrid from "layouts/insurance/insurancePatientGrid";
-import InsurancePatientProfile from "layouts/insurance/insurancePatientProfile";
+import InsurancePatientGrid from "layouts/insurance/patientGrid";
+import InsurancePatientProfile from "layouts/insurance/patientProfile";
 import PatientProfilePatient from "layouts/patient/patientProfile";
 
 const routes = [
@@ -139,10 +139,10 @@ export const insuranceRoutes = [
     component: <InsurancePatientGrid/>,
   },
   {
-    type: "route",
-    name: "Patient Profile Hospital",
-    key: "patient-profile",
-    route: "/insurance/patient-profile",
+    // type: "route",
+    // name: "Patient Profile Hospital",
+    // key: "patient-profile",
+    route: "/insurance/patient-profile/:id",
     icon: <ArgonBox component="i" color="dark" fontSize="14px" className="ni ni-single-02" />,
     component: <InsurancePatientProfile/>,
   },
