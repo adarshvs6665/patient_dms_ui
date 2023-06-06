@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 
 // @mui material components
@@ -21,7 +22,7 @@ import breakpoints from "assets/theme/base/breakpoints";
 // Images
 import burceMars from "assets/images/bruce-mars.jpg";
 
-function Header() {
+function Header({patientData,setReportType}) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
 
@@ -71,10 +72,10 @@ function Header() {
           <Grid item>
             <ArgonBox height="100%" mt={0.5} lineHeight={1}>
               <ArgonTypography variant="h5" fontWeight="medium">
-                Shef Rehmon
+                {patientData.name}
               </ArgonTypography>
               <ArgonTypography variant="button" color="text" fontWeight="medium">
-                shefrehmin@dapp.com
+              {patientData.email}
               </ArgonTypography>
             </ArgonBox>
           </Grid>
@@ -83,6 +84,7 @@ function Header() {
               <Tabs orientation={tabsOrientation} value={tabValue} onChange={handleSetTabValue}>
                 <Tab
                   label="Authorized Hospitals"
+                  onClick={()=>{setReportType("hospital")}}
                   style={{ fontSize: ".8rem", fontWeight: "bold" }}
                   icon={
                     <i
@@ -93,6 +95,7 @@ function Header() {
                 />
                 <Tab
                   label="Authorized Insurances"
+                  onClick={()=>{setReportType("insurance")}}
                   style={{ fontSize: ".8rem", fontWeight: "bold" }}
                   icon={
                     <i

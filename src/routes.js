@@ -123,7 +123,7 @@ export const patientRoutes = [
     type: "route",
     name: "Profile",
     key: "profile",
-    route: "/patient/profile",
+    route: "/patient/profile/:id",
     icon: <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-single-02" />,
     component: <PatientProfilePatient/>,
   }

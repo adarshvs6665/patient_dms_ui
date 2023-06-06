@@ -13,6 +13,14 @@ import ArgonButton from "components/ArgonButton";
 import { Stack } from "@mui/material";
 import { useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { useArgonController } from "context";
+import { fetchUnAuthorisedHospitals } from "services/hospital/fetchUnauthorisedHospitals";
+import { fetchUnAuthorisedInsurances } from "services/hospital/fetchUnauthorisedInsurance";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import { authorizeHospital } from "services/hospital/authoriseHospital";
+import { authorizeInsuranceCompany } from "services/hospital/authoriseInsurance";
 
 const style = {
   position: "absolute",
@@ -26,27 +34,78 @@ const style = {
   p: 4,
 };
 
-export default function AssignHospitalInsuranceModal(props) {
+export default function AssignHospitalInsuranceModal({ open, setOpen, type }) {
+  const [controller, dispatch] = useArgonController();
+  const { auth } = controller;
+  const { id } = useParams();
 
-  const [wallet, setWallet] = useState("0xe99E8bD7eed9Aa2CDFc9cad5681E183b5282cDed");
+  const [toBeAuthorizedId, setToBeAuthorizedId] = useState("");
+  const [insuranceData, setInsuranceData] = useState([]);
+  const [hospitalData, setHospitalData] = useState([]);
 
-  const handleClose = () => props.setOpen(false);
+  const handleClose = () => setOpen(false);
 
-  const handleSubmit = () => {
-    alert("Clicked");
+  useEffect(() => {
+    fetchUnAuthorisedInsurances(id, auth.id).then((response) => {
+      setInsuranceData(response.data.unAuthorizedInsuranceCompanies);
+    });
+
+    fetchUnAuthorisedHospitals(id, auth.id).then((response) => {
+      setHospitalData(response.data.unauthorizedHospitals);
+    });
+  }, []);
+
+  useEffect(() => {
+    setToBeAuthorizedId("");
+  }, [type]);
+
+  const handleSubmit = async () => {
+    if (type === "hospital") {
+      const data = {
+        hospitalId: auth.id,
+        patientId: id,
+        hospitalToBeAuthorizedId: toBeAuthorizedId,
+      };
+
+      const response = await authorizeHospital(data);
+      console.log(response);
+      if (response.status === "success") {
+        toast(response.message);
+        setToBeAuthorizedId("");
+        setOpen(false);
+      } else {
+        toast(response.message);
+      }
+    }
+    if (type === "insurance") {
+      const data = {
+        hospitalId: auth.id,
+        patientId: id,
+        insuranceCompanyToBeAuthorizedId: toBeAuthorizedId,
+      };
+      const response = await authorizeInsuranceCompany(data);
+      console.log(response);
+      if (response.status === "success") {
+        toast(response.message);
+        setToBeAuthorizedId("");
+        setOpen(false);
+      } else {
+        toast(response.message);
+      }
+    }
   };
 
   return (
     <div>
       <Modal
-        open={props.open}
+        open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Assign New Hospital
+            {type === "hospital" ? "Assign New Hospital" : "Assign New Insurance"}
           </Typography>
           <ArgonBox component="form" role="form" sx={{ mt: 2 }}>
             <ArgonBox sx={{ minWidth: 120 }}>
@@ -68,48 +127,60 @@ export default function AssignHospitalInsuranceModal(props) {
                   }}
                   displayEmpty // Display the selected value when no option is selected
                   IconComponent={ArrowDropDownIcon}
-                  value={wallet}
+                  value={toBeAuthorizedId}
                   onChange={(event) => {
                     console.log(event.target.value);
-                    setWallet(event.target.value);
+                    setToBeAuthorizedId(event.target.value);
                   }}
                 >
-                  <MenuItem value={"0xe99E8bD7eed9Aa2CDFc9cad5681E183b5282cDed"}>
-                    0xe99E8bD7eed9Aa2CDFc9cad5681E183b5282cDed
+                  <MenuItem value={""}>
+                    {type === "hospital" ? "Select Hospital" : "Select Insurance"}
                   </MenuItem>
-                  <MenuItem value={"0xe99E8bD7DFc9c183b52adeed9Aa2C5681E82cDed"}>
-                    0xe99E8bD7DFc9c183b52adeed9Aa2C5681E82cDed
-                  </MenuItem>
-                  <MenuItem value={"0xe99E8bD7ee9c183b52ad5681E82cDedd9Aa2CDFc"}>
-                    0xe99E8bD7ee9c183b52ad5681E82cDedd9Aa2CDFc
-                  </MenuItem>
+
+                  {type === "hospital"
+                    ? hospitalData.map((item, key) => {
+                        return (
+                          <MenuItem key={key} value={item.hospitalId}>
+                            {item.name}
+                          </MenuItem>
+                        );
+                      })
+                    : insuranceData.map((item, key) => {
+                        return (
+                          <MenuItem key={key} value={item.insuranceCompanyId}>
+                            {item.name}
+                          </MenuItem>
+                        );
+                      })}
                 </Select>
               </FormControl>
             </ArgonBox>
 
-            <ArgonBox mb={2}>
-              {/* <ArgonInput
-                type="select"
-                placeholder="Wallet"
-                size="large"
-                onChange={(event) => {
-                  setWallet(event.target.value);
-                }}
-              />
-               */}
-            </ArgonBox>
+            <ArgonBox mb={2}></ArgonBox>
             <Stack mt={4} mb={1} direction={"row"} gap={2}>
               <ArgonButton color="secondary" size="medium" onClick={handleClose} fullWidth>
                 Cancel
               </ArgonButton>
               <ArgonButton color="dark" size="medium" onClick={handleSubmit} fullWidth>
-                Create Hospital
+                {type === "hospital" ? "Create Hospital" : "Create Insurance"}
               </ArgonButton>
             </Stack>
             <ArgonBox mt={3} textAlign="center"></ArgonBox>
           </ArgonBox>
         </Box>
       </Modal>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   );
 }

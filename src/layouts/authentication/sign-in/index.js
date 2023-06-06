@@ -82,7 +82,7 @@ function Illustration({ role, title }) {
             console.log(auth.role);
             await setAuth(dispatch, auth);
             console.log(auth.role);
-            navigate("/patient/profile");
+            navigate(`/patient/profile/${auth.id}`);
           } catch (error) {
             toast(error.message);
           }
