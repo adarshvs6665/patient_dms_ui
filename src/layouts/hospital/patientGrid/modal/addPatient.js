@@ -47,7 +47,7 @@ export default function AddPatientModal(props) {
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [state, setState] = useState("");
-  const [dob, setDob] = useState(null);
+  const [dob, setDob] = useState(dayjs().format("DD/MM/YYYY").toString());
   const [gender, setGender] = useState("");
   const [phone, setPhone] = useState("");
   const [wallet, setWallet] = useState("");

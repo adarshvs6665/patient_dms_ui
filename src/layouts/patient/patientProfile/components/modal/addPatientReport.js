@@ -14,7 +14,6 @@ import { useState } from "react";
 import { useArgonController } from "context";
 import { ToastContainer, toast } from "react-toastify";
 
-
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -38,7 +37,7 @@ const style = {
 };
 
 export default function AddPatientReportModal(props) {
-  const [dateOfVisit, setDateOfVisit] = useState("");
+  const [dateOfVisit, setDateOfVisit] = useState(dayjs().format("DD/MM/YYYY").toString());
   const [causeOfVisit, setCauseOfVisit] = useState("");
   const [condition, setCondition] = useState("");
   const [description, setDescription] = useState("");

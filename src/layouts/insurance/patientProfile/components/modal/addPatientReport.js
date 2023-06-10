@@ -38,7 +38,7 @@ const style = {
 };
 
 export default function AddPatientReportModal(props) {
-  const [dateOfVisit, setDateOfVisit] = useState("");
+  const [dateOfVisit, setDateOfVisit] = useState(dayjs().format("DD/MM/YYYY").toString());
   const [causeOfVisit, setCauseOfVisit] = useState("");
   const [condition, setCondition] = useState("");
   const [description, setDescription] = useState("");
