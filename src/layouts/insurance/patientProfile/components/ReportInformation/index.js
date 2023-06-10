@@ -21,7 +21,7 @@ function ReportInformation({ patientReports}) {
       </ArgonBox>
       <ArgonBox pt={1} pb={2} px={2} sx={{ height: "50vh", overflowY: "scroll" }}>
         <ArgonBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
-          {patientReports.reverse().map((item, key) => {
+          {patientReports.map((item, key) => {
             return (
               <Report
                 key={key}

@@ -51,7 +51,7 @@ function Overview() {
 
   useEffect(() => {
     fetchPatientReports(id, auth.id).then((response) => {
-      setPatientReports(response.data.reports);
+      setPatientReports(response.data.reports.reverse());
     });
   }, [openReport]);
 
