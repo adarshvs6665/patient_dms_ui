@@ -1,9 +1,3 @@
-// Argon Dashboard 2 MUI layouts
-import Dashboard from "layouts/dashboard";
-import Tables from "layouts/tables";
-import Billing from "layouts/billing";
-import Profile from "layouts/profile";
-
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
 import Hospital from "layouts/admin/hospital";
@@ -14,78 +8,13 @@ import InsurancePatientGrid from "layouts/insurance/patientGrid";
 import InsurancePatientProfile from "layouts/insurance/patientProfile";
 import PatientProfilePatient from "layouts/patient/patientProfile";
 
-const routes = [
-  {
-    type: "route",
-    name: "Dashboard",
-    key: "dashboard",
-    route: "/dashboard",
-    icon: <ArgonBox component="i" color="primary" fontSize="14px" className="ni ni-tv-2" />,
-    component: <Dashboard />,
-  },
-  {
-    type: "route",
-    name: "Hospitals",
-    key: "hospitals",
-    route: "/admin/hospital",
-    icon: (
-      <ArgonBox component="i" color="error" fontSize="14px" className="ni ni-building" />
-    ),
-    component: <Hospital />,
-  },
-  {
-    type: "route",
-    name: "Insurances",
-    key: "insurance-companies",
-    route: "/admin/insurance-companies",
-    icon: (
-      <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-credit-card" />
-    ),
-    component: <Insurance />,
-  },
-  {
-    type: "route",
-    name: "Billing",
-    key: "billing",
-    route: "/billing",
-    icon: <ArgonBox component="i" color="success" fontSize="14px" className="ni ni-credit-card" />,
-    component: <Billing />,
-  },
-  {
-    type: "route",
-    name: "Profile",
-    key: "profile",
-    route: "/profile",
-    icon: <ArgonBox component="i" color="dark" fontSize="14px" className="ni ni-single-02" />,
-    component: <Profile />,
-  },
-  {
-    type: "route",
-    name: "Hospital Main",
-    key: "hsp-main",
-    route: "/hospital/patients",
-    icon: <ArgonBox component="i" color="dark" fontSize="14px" className="ni ni-single-02" />,
-    component: <PatientGrid/>,
-  },
-  {
-    type: "route",
-    name: "Patient Profile Hospital",
-    key: "hsp-pat-prp",
-    route: "/hospital/patient-profile",
-    icon: <ArgonBox component="i" color="dark" fontSize="14px" className="ni ni-single-02" />,
-    component: <PatientProfile/>,
-  },
-];
-
 export const adminRoutes = [
   {
     type: "route",
     name: "Hospital",
     key: "hospitals",
     route: "admin/hospitals",
-    icon: (
-      <ArgonBox component="i" color="error" fontSize="14px" className="ni ni-building" />
-    ),
+    icon: <ArgonBox component="i" color="error" fontSize="14px" className="ni ni-building" />,
     component: <Hospital />,
   },
   {
@@ -93,11 +22,9 @@ export const adminRoutes = [
     name: "Insurance Company",
     key: "insurance-companies",
     route: "admin/insurance-companies",
-    icon: (
-      <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-credit-card" />
-    ),
+    icon: <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-credit-card" />,
     component: <Insurance />,
-  }
+  },
 ];
 export const hospitalRoutes = [
   {
@@ -106,7 +33,7 @@ export const hospitalRoutes = [
     key: "patients",
     route: "/hospital/patients",
     icon: <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-single-02" />,
-    component: <PatientGrid/>,
+    component: <PatientGrid />,
   },
   {
     // type: "route",
@@ -114,7 +41,7 @@ export const hospitalRoutes = [
     // key: "patient-profile",
     route: "/hospital/patient-profile/:id",
     icon: <ArgonBox component="i" color="dark" fontSize="14px" className="ni ni-single-02" />,
-    component: <PatientProfile/>,
+    component: <PatientProfile />,
   },
 ];
 
@@ -125,8 +52,8 @@ export const patientRoutes = [
     key: "profile",
     route: "/patient/profile/:id",
     icon: <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-single-02" />,
-    component: <PatientProfilePatient/>,
-  }
+    component: <PatientProfilePatient />,
+  },
 ];
 
 export const insuranceRoutes = [
@@ -136,7 +63,7 @@ export const insuranceRoutes = [
     key: "patients",
     route: "/insurance/patients",
     icon: <ArgonBox component="i" color="warning" fontSize="14px" className="ni ni-single-02" />,
-    component: <InsurancePatientGrid/>,
+    component: <InsurancePatientGrid />,
   },
   {
     // type: "route",
@@ -144,8 +71,7 @@ export const insuranceRoutes = [
     // key: "patient-profile",
     route: "/insurance/patient-profile/:id",
     icon: <ArgonBox component="i" color="dark" fontSize="14px" className="ni ni-single-02" />,
-    component: <InsurancePatientProfile/>,
+    component: <InsurancePatientProfile />,
   },
 ];
 
-export default routes;
