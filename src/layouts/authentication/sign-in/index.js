@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
-import ArgonTypography from "components/ArgonTypography";
 import ArgonInput from "components/ArgonInput";
 import ArgonButton from "components/ArgonButton";
 import { ToastContainer, toast } from "react-toastify";
@@ -45,14 +44,7 @@ function Illustration({ role, title }) {
   const [password, setPassword] = useState("");
   const [controller, dispatch] = useArgonController();
   const {
-    miniSidenav,
-    darkSidenav,
-    auth,
-    direction,
-    layout,
     openConfigurator,
-    sidenavColor,
-    darkMode,
   } = controller;
 
   const navigate = useNavigate();
@@ -68,7 +60,6 @@ function Illustration({ role, title }) {
             console.log("Res", response);
             const auth = JSON.parse(localStorage.getItem("auth"));
             setAuth(dispatch, auth);
-            console.log(auth.role);
             navigate("/admin/hospitals");
           } catch (error) {
             toast(error.message);

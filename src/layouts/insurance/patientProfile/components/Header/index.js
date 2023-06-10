@@ -4,9 +4,6 @@ import { useState, useEffect } from "react";
 // @mui material components
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
-import AppBar from "@mui/material/AppBar";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
@@ -19,9 +16,8 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 // Argon Dashboard 2 MUI base styles
 import breakpoints from "assets/theme/base/breakpoints";
 
-function Header({patientData}) {
+function Header({ patientData }) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
-  const [tabValue, setTabValue] = useState(0);
 
   useEffect(() => {
     // A function that sets the orientation state of the tabs.
@@ -42,8 +38,6 @@ function Header({patientData}) {
     // Remove event listener on cleanup
     return () => window.removeEventListener("resize", handleTabsOrientation);
   }, [tabsOrientation]);
-
-  const handleSetTabValue = (event, newValue) => setTabValue(newValue);
 
   return (
     <ArgonBox position="relative">
@@ -72,7 +66,7 @@ function Header({patientData}) {
                 {patientData.name}
               </ArgonTypography>
               <ArgonTypography variant="button" color="text" fontWeight="medium">
-              {patientData.email}
+                {patientData.email}
               </ArgonTypography>
             </ArgonBox>
           </Grid>

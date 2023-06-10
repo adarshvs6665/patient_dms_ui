@@ -26,7 +26,7 @@ function Overview() {
   const { id } = useParams();
   const [pateientProfile, setPateientProfile] = useState({});
   const [patientReports, setPatientReports] = useState([]);
-  const [controller, dispatch] = useArgonController();
+  const [controller] = useArgonController();
   const { auth } = controller;
 
   useEffect(() => {

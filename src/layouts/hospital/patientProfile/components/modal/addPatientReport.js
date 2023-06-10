@@ -14,13 +14,11 @@ import { useState } from "react";
 import { useArgonController } from "context";
 import { ToastContainer, toast } from "react-toastify";
 
-
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 
 import { useParams } from "react-router-dom";
 import { updatePatient } from "services/hospital/updatePatient";
@@ -45,7 +43,7 @@ export default function AddPatientReportModal(props) {
   const [doctor, setDoctor] = useState("");
   const [medication, setMedication] = useState("");
 
-  const [controller, dispatch] = useArgonController();
+  const [controller] = useArgonController();
   const { auth } = controller;
 
   const { id } = useParams();
@@ -175,7 +173,7 @@ export default function AddPatientReportModal(props) {
                 Cancel
               </ArgonButton>
               <ArgonButton color="dark" size="medium" onClick={handleSubmit} fullWidth>
-                Add report  
+                Add report
               </ArgonButton>
             </Stack>
             <ArgonBox mt={3} textAlign="center"></ArgonBox>

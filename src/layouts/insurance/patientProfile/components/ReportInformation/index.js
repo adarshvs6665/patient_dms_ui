@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 // @mui material components
-import { Icon, Tooltip } from "@mui/material";
 import Card from "@mui/material/Card";
 
 // Argon Dashboard 2 MUI components

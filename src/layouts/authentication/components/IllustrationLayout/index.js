@@ -11,7 +11,7 @@ import ArgonTypography from "components/ArgonTypography";
 // Argon Dashboard 2 MUI example components
 import PageLayout from "examples/LayoutContainers/PageLayout";
 
-function IllustrationLayout({ color, header, title, description, button, illustration, children }) {
+function IllustrationLayout({ color, header, title, description, illustration, children }) {
   return (
     <PageLayout background="white">
       <Grid container>

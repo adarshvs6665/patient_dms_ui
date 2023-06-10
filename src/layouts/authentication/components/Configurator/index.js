@@ -1,16 +1,7 @@
-// react-github-btn
-import GitHubButton from "react-github-btn";
-
 // @mui material components
 import Divider from "@mui/material/Divider";
-import Switch from "@mui/material/Switch";
-import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
 import Icon from "@mui/material/Icon";
-
-// @mui icons
-import TwitterIcon from "@mui/icons-material/Twitter";
-import FacebookIcon from "@mui/icons-material/Facebook";
 
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
@@ -21,31 +12,13 @@ import ArgonButton from "components/ArgonButton";
 import ConfiguratorRoot from "layouts/authentication/components/Configurator/ConfiguratorRoot";
 
 // Argon Dashboard 2 MUI context
-import {
-  useArgonController,
-  setOpenConfigurator,
-  setDarkSidenav,
-  setMiniSidenav,
-  setFixedNavbar,
-  setSidenavColor,
-  setDarkMode,
-} from "context";
+import { useArgonController, setOpenConfigurator } from "context";
 
 function Configurator() {
   const [controller, dispatch] = useArgonController();
-  const { openConfigurator, darkSidenav, miniSidenav, fixedNavbar, sidenavColor, darkMode } =
-    controller;
-  const sidenavColors = ["primary", "dark", "info", "success", "warning", "error"];
+  const { openConfigurator, darkMode } = controller;
 
   const handleCloseConfigurator = () => setOpenConfigurator(dispatch, false);
-  const handledarkSidenav = () => setDarkSidenav(dispatch, true);
-  const handleWhiteSidenav = () => setDarkSidenav(dispatch, false);
-  const handleMiniSidenav = () => setMiniSidenav(dispatch, !miniSidenav);
-  const handleFixedNavbar = () => setFixedNavbar(dispatch, !fixedNavbar);
-  const handleDarkMode = () => {
-    setDarkSidenav(dispatch, !darkMode);
-    setDarkMode(dispatch, !darkMode);
-  };
 
   return (
     <ConfiguratorRoot variant="permanent" ownerState={{ openConfigurator }}>
@@ -104,14 +77,14 @@ function Configurator() {
             </ArgonButton>
           </ArgonBox>
           <ArgonBox mb={2}>
-          <ArgonButton
-            component={Link}
-            href="/authentication/insurance/sign-in"
-            rel="noreferrer"
-            color="warning"
-            fullWidth
-          >
-            Insurance Sign In
+            <ArgonButton
+              component={Link}
+              href="/authentication/insurance/sign-in"
+              rel="noreferrer"
+              color="warning"
+              fullWidth
+            >
+              Insurance Sign In
             </ArgonButton>
           </ArgonBox>
           <ArgonButton
@@ -122,7 +95,7 @@ function Configurator() {
             fullWidth
           >
             Admin Sign in
-            </ArgonButton>
+          </ArgonButton>
         </ArgonBox>
       </ArgonBox>
     </ConfiguratorRoot>

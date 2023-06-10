@@ -3,17 +3,14 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 
 import ArgonBox from "components/ArgonBox";
 import ArgonInput from "components/ArgonInput";
 import ArgonButton from "components/ArgonButton";
-import ArgonTypography from "components/ArgonTypography";
-
-import { Icon, Input, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { fetchUnusedAddresses } from "services/admin/fetchWalletAddres";
@@ -42,7 +39,7 @@ export default function AddHospitalModal(props) {
   const [phone, setPhone] = useState("");
   const [wallet, setWallet] = useState("");
   const [unUsedAddresses, setUnUsedAddress] = useState(null);
-  const [controller, dispatch] = useArgonController();
+  const [controller] = useArgonController();
   const { auth } = controller;
 
   React.useEffect(() => {

@@ -1,7 +1,5 @@
 // react-routers components
 /* eslint-disable react/prop-types */
-import { Link } from "react-router-dom";
-
 // prop-types is library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -18,7 +16,7 @@ const hospitalImageUrl =
 const insuranceCompanyImageUrl =
   "https://img.freepik.com/premium-vector/concept-vector-illustration-life-insurance-protection-health-life-flat-vector-illustration_98702-1374.jpg";
 
-function HospitalInsuranceList({ title, list, type, open,setOpen }) {
+function HospitalInsuranceList({ title, list, type }) {
 
   const renderProfiles = list.map(({ name, email }) => (
     <ArgonBox key={name} component="li" display="flex" alignItems="center" py={1} mb={1}>

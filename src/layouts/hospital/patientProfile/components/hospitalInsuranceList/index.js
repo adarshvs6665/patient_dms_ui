@@ -1,7 +1,5 @@
 // react-routers components
 /* eslint-disable react/prop-types */
-import { Link } from "react-router-dom";
-
 // prop-types is library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -14,7 +12,6 @@ import ArgonTypography from "components/ArgonTypography";
 import ArgonAvatar from "components/ArgonAvatar";
 import ArgonButton from "components/ArgonButton";
 import { Icon, Tooltip } from "@mui/material";
-import { useState } from "react";
 import AssignHospitalInsuranceModal from "layouts/hospital/patientProfile/components/modal/assignHospitalInsurance";
 const hospitalImageUrl =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYhdQu0h19z4DvCi74Fgul3jX3tNL6QqQYaqQwwoEu-Uz1oP-XKUopb7teZoLQjGI7HDp6XwXEPyE&usqp=CAU&ec=48665701";

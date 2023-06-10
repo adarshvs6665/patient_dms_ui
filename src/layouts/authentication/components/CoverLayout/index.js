@@ -11,7 +11,7 @@ import ArgonTypography from "components/ArgonTypography";
 // Argon Dashboard 2 MUI example components
 import PageLayout from "examples/LayoutContainers/PageLayout";
 
-function CoverLayout({ title, description, image, imgPosition, button, children }) {
+function CoverLayout({ title, description, image, imgPosition, children }) {
   return (
     <PageLayout>
       <ArgonBox mt={1}>

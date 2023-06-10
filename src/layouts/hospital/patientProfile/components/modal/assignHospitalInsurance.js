@@ -6,10 +6,8 @@ import Modal from "@mui/material/Modal";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-
 import ArgonBox from "components/ArgonBox";
 import ArgonButton from "components/ArgonButton";
-
 import { Stack } from "@mui/material";
 import { useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -35,7 +33,7 @@ const style = {
 };
 
 export default function AssignHospitalInsuranceModal({ open, setOpen, type }) {
-  const [controller, dispatch] = useArgonController();
+  const [controller] = useArgonController();
   const { auth } = controller;
   const { id } = useParams();
 

@@ -1,6 +1,5 @@
 // @mui material components
 import Card from "@mui/material/Card";
-import Icon from "@mui/material/Icon";
 
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
@@ -20,7 +19,7 @@ import patientData from "layouts/insurance/patientGrid/data/patientTableData";
 function PatientGrid() {
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
-  const [controller, dispatch] = useArgonController();
+  const [controller] = useArgonController();
   const { auth } = controller;
   
 

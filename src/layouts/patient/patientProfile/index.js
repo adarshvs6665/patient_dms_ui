@@ -10,8 +10,6 @@ import ProfileInfoCard from "layouts/patient/patientProfile/components/ProfileIn
 // Overview page components
 import Header from "layouts/patient/patientProfile/components/Header";
 
-// Data
-
 import HospitalInsuranceList from "layouts/patient/patientProfile/components/hospitalInsuranceList/index";
 import ReportInformation from "layouts/patient/patientProfile/components/ReportInformation";
 import { useParams } from "react-router-dom";
@@ -35,7 +33,7 @@ function Overview() {
   const [hospitalListData, setHospitalListData] = useState([]);
   const [insuranceListData, setInsuranceListData] = useState([]);
   const [patientReports, setPatientReports] = useState([]);
-  const [controller, dispatch] = useArgonController();
+  const [controller] = useArgonController();
   const { auth } = controller;
 
   useEffect(() => {

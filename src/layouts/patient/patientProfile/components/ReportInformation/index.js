@@ -1,11 +1,9 @@
 /* eslint-disable react/prop-types */
 // @mui material components
-import { Icon, Tooltip } from "@mui/material";
 import Card from "@mui/material/Card";
 
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
-import ArgonButton from "components/ArgonButton";
 import ArgonTypography from "components/ArgonTypography";
 
 
@@ -13,7 +11,7 @@ import ArgonTypography from "components/ArgonTypography";
 import Report from "layouts/patient/patientProfile/components/Report";
 
 
-function ReportInformation({ patientReports,open,setOpen }) {
+function ReportInformation({ patientReports }) {
   return (
     <Card id="delete-account">
       <ArgonBox pt={3} px={2} pb={2} display="flex" justifyContent="space-between" alignItems="center">

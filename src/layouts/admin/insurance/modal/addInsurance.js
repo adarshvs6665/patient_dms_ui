@@ -6,11 +6,8 @@ import Modal from "@mui/material/Modal";
 import ArgonBox from "components/ArgonBox";
 import ArgonInput from "components/ArgonInput";
 import ArgonButton from "components/ArgonButton";
-import ArgonTypography from "components/ArgonTypography";
-
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import { ToastContainer, toast } from "react-toastify";
 import { useArgonController } from "context";
@@ -41,7 +38,7 @@ export default function AddInsuranceModal(props) {
   const [phone, setPhone] = useState("");
   const [wallet, setWallet] = useState("");
   const [unUsedAddresses, setUnUsedAddress] = useState(null);
-  const [controller, dispatch] = useArgonController();
+  const [controller] = useArgonController();
   
 
   const {

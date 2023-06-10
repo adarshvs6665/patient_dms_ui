@@ -3,7 +3,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 
@@ -24,7 +24,7 @@ import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 
 const style = {
   position: "absolute",
@@ -49,7 +49,7 @@ export default function AddPatientModal(props) {
   const [phone, setPhone] = useState("");
   const [wallet, setWallet] = useState("");
   const [unUsedAddresses, setUnUsedAddress] = useState(null);
-  const [controller, dispatch] = useArgonController();
+  const [controller] = useArgonController();
   const { auth } = controller;
 
   React.useEffect(() => {
