@@ -22,6 +22,9 @@ import ArgonInput from "components/ArgonInput";
 import Breadcrumbs from "examples/Breadcrumbs";
 import NotificationItem from "examples/Items/NotificationItem";
 
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+
 // Custom styles for DashboardNavbar
 import {
   navbar,
@@ -38,14 +41,22 @@ import {
   setTransparentNavbar,
   setMiniSidenav,
   setOpenConfigurator,
+  setDarkSidenav,
+  setDarkMode,
 } from "context";
 
 function DashboardNavbar({ absolute, light, isMini }) {
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useArgonController();
-  const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator } = controller;
+  const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator, darkMode } = controller;
   const [openMenu, setOpenMenu] = useState(false);
   const route = useLocation().pathname.split("/").slice(1);
+
+  const handleDarkMode = () => {
+    setDarkSidenav(dispatch, !darkMode);
+    setDarkMode(dispatch, !darkMode);
+  };
+
 
   useEffect(() => {
     // Setting the navbar type
@@ -85,6 +96,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
       sx={(theme) => navbar(theme, { transparentNavbar, absolute, light })}
     >
       <Toolbar sx={(theme) => navbarContainer(theme, { navbarType })}>
+        <></>
         <ArgonBox
           color={light && transparentNavbar ? "white" : "dark"}
           mb={{ xs: 1, md: 0 }}
@@ -99,6 +111,12 @@ function DashboardNavbar({ absolute, light, isMini }) {
           <Icon fontSize="medium" sx={navbarDesktopMenu} onClick={handleMiniSidenav}>
             {miniSidenav ? "menu_open" : "menu"}
           </Icon>
+        </ArgonBox>
+
+        <ArgonBox>
+          <IconButton sx={{ ml: 1 }} onClick={handleDarkMode} color={darkMode ? "white" : "dark"}>
+            {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+          </IconButton>
         </ArgonBox>
       </Toolbar>
     </AppBar>
