@@ -5,8 +5,7 @@ import ArgonBox from "components/ArgonBox";
 
 // Argon Dashboard 2 MUI example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import Footer from "examples/Footer";
-import ProfileInfoCard from "./ProfileInfoCard";
+import ProfileInfoCard from "layouts/insurance/patientProfile/components/ProfileInfoCard";
 
 // Overview page components
 import Header from "layouts/insurance/patientProfile/components/Header";

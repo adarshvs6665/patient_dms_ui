@@ -15,7 +15,7 @@ import { Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import { fetchAuthorisedPatients } from "services/insurance/fetchAuthorisedPatients";
 import { useArgonController } from "context";
-import patientData from "./data/patientTableData";
+import patientData from "layouts/insurance/patientGrid/data/patientTableData";
 
 function PatientGrid() {
   const [columns, setColumns] = useState([]);
