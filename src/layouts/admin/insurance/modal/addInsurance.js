@@ -52,7 +52,7 @@ export default function AddInsuranceModal(props) {
       fetchUnusedAddresses().then((addresses) => {
         setUnUsedAddress(addresses.data.addresses);
       });
-    }, []);
+    }, [props.open]);
 
   const handleClose = () => props.setOpen(false);
 

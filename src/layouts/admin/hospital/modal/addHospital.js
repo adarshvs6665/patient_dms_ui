@@ -49,7 +49,7 @@ export default function AddHospitalModal(props) {
     fetchUnusedAddresses().then((addresses) => {
       setUnUsedAddress(addresses.data.addresses);
     });
-  }, []);
+  }, [props.open]);
 
   const handleClose = () => props.setOpen(false);
 
