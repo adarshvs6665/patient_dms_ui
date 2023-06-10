@@ -85,7 +85,7 @@ export default function AddPatientReportModal(props) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Create Patient Report
+            Add Patient Report
           </Typography>
           <ArgonBox component="form" role="form" sx={{ mt: 2 }}>
             <ArgonBox mb={2}>
@@ -175,7 +175,7 @@ export default function AddPatientReportModal(props) {
                 Cancel
               </ArgonButton>
               <ArgonButton color="dark" size="medium" onClick={handleSubmit} fullWidth>
-                Create Patient
+                Add report  
               </ArgonButton>
             </Stack>
             <ArgonBox mt={3} textAlign="center"></ArgonBox>
