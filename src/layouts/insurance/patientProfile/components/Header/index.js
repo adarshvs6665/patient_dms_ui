@@ -19,9 +19,6 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 // Argon Dashboard 2 MUI base styles
 import breakpoints from "assets/theme/base/breakpoints";
 
-// Images
-import burceMars from "assets/images/bruce-mars.jpg";
-
 function Header({patientData}) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
