@@ -13,8 +13,8 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import { Stack } from "@mui/material";
 import ArgonButton from "components/ArgonButton";
 import { useEffect, useState } from "react";
-import insuranceTableData from "./data/insuranceTableData";
-import AddInsuranceModal from "./modal/addInsurance";
+import insuranceTableData from "layouts/admin/insurance/data/insuranceTableData";
+import AddInsuranceModal from "layouts/admin/insurance/modal/addInsurance";
 import { fetchAllInsurances } from "services/admin/fetchAllInsurance";
 
 function Insurance() {

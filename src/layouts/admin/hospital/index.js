@@ -11,10 +11,10 @@ import Table from "examples/Tables/Table";
 
 // Data
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import hospitalTableData from "./data/hospitalTableData";
+import hospitalTableData from "layouts/admin/hospital/data/hospitalTableData";
 import { Stack } from "@mui/material";
 import ArgonButton from "components/ArgonButton";
-import AddHospitalModal from "./modal/addHospital";
+import AddHospitalModal from "layouts/admin/hospital/modal/addHospital";
 import { useEffect, useState } from "react";
 import { fetchAllHospitals } from "services/admin/fetchAllHospitals";
 
