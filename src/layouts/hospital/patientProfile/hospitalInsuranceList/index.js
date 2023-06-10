@@ -56,7 +56,7 @@ function HospitalInsuranceList({ title, list, type, open,setOpen }) {
           {title}
         </ArgonTypography>
         <ArgonTypography  variant="body2" color="secondary" onClick={()=>{setOpen(true)}}>
-          <Tooltip title={"Authorize new hospital"} placement="top">
+          <Tooltip title={type === "hospital" ? "Authorize new hospital" : "Authorize new insurance"} placement="top">
           <ArgonButton
                   component="button"
                   rel="noreferrer"
