@@ -5,15 +5,13 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 
 import ArgonBox from "components/ArgonBox";
 import ArgonInput from "components/ArgonInput";
 import ArgonButton from "components/ArgonButton";
-import ArgonTypography from "components/ArgonTypography";
 
-import { Icon, Input, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
@@ -25,7 +23,6 @@ import { createPatient } from "services/hospital/addPatient";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 
@@ -71,8 +68,8 @@ export default function AddPatientModal(props) {
       address: address,
       state: state,
       phone: phone,
-      gender:gender,
-      dob:dob,
+      gender: gender,
+      dob: dob,
       wallet: wallet,
       hospitalId: auth.id,
     };

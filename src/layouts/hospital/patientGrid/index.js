@@ -15,10 +15,10 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import { Stack } from "@mui/material";
 import ArgonButton from "components/ArgonButton";
 import { useEffect, useState } from "react";
-import AddPatientModal from "./modal/addPatient";
+import AddPatientModal from "layouts/hospital/patientGrid/modal/addPatient";
 import { fetchAuthorisedPatients } from "services/hospital/fetchAuthorisedPatients";
 import { useArgonController } from "context";
-import patientData from "./data/patientTableData";
+import patientData from "layouts/hospital/patientGrid/data/patientTableData";
 
 function PatientGrid() {
   const [columns, setColumns] = useState([]);
