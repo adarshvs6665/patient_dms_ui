@@ -1,4 +1,5 @@
 // react-routers components
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 
 // prop-types is library for typechecking of props
@@ -21,11 +22,15 @@ const insuranceCompanyImageUrl =
   "https://img.freepik.com/premium-vector/concept-vector-illustration-life-insurance-protection-health-life-flat-vector-illustration_98702-1374.jpg";
 
 function HospitalInsuranceList({ title, list, type, open, setOpen }) {
-
   const renderProfiles = list.map(({ name, email }) => (
     <ArgonBox key={name} component="li" display="flex" alignItems="center" py={1} mb={1}>
       <ArgonBox mr={2}>
-        <ArgonAvatar src={type === "hospital" ? hospitalImageUrl: insuranceCompanyImageUrl} alt="something here" variant="rounded" shadow="md" />
+        <ArgonAvatar
+          src={type === "hospital" ? hospitalImageUrl : insuranceCompanyImageUrl}
+          alt="something here"
+          variant="rounded"
+          shadow="md"
+        />
       </ArgonBox>
       <ArgonBox
         display="flex"
@@ -49,34 +54,50 @@ function HospitalInsuranceList({ title, list, type, open, setOpen }) {
   ));
 
   return (
-    <Card sx={{ height: "50vh", overflowY:"scroll" }}>
-      <ArgonBox pt={2} px={2} display="flex" justifyContent="space-between" alignItems="center">
+    <Card>
+      <ArgonBox
+        pt={2}
+        px={2}
+        pb={2}
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <ArgonTypography variant="h6" fontWeight="medium" textTransform="capitalize">
           {title}
         </ArgonTypography>
-        <ArgonTypography  variant="body2" color="secondary" onClick={()=>{setOpen(true)}}>
-          <Tooltip title={"Authorize new hospital"} placement="top">
-          <ArgonButton
-                  component="button"
-                  rel="noreferrer"
-                  color="dark"
-                  fullWidth
-                  onClick={() => {
-                    setOpen(true);
-                  }}
-                >
-                  <Icon sx={{ fontWeight: "bold" }}>add</Icon>
-                  &nbsp;{"Authorize"}&nbsp;
-                </ArgonButton>
+        <ArgonTypography
+          variant="body2"
+          color="secondary"
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
+          <Tooltip
+            title={type === "hospital" ? "Authorize new hospital" : "Authorize new insurance"}
+            placement="top"
+          >
+            <ArgonButton
+              component="button"
+              rel="noreferrer"
+              color="dark"
+              fullWidth
+              onClick={() => {
+                setOpen(true);
+              }}
+            >
+              <Icon sx={{ fontWeight: "bold" }}>add</Icon>
+              &nbsp;{"Authorize"}&nbsp;
+            </ArgonButton>
           </Tooltip>
         </ArgonTypography>
       </ArgonBox>
-      <ArgonBox p={2}>
+      <ArgonBox p={2} sx={{ height: "40vh", overflowY: "scroll" }}>
         <ArgonBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
           {renderProfiles}
         </ArgonBox>
       </ArgonBox>
-      <AssignHospitalInsuranceModal open={open} setOpen={setOpen} type={type}/>
+      <AssignHospitalInsuranceModal open={open} setOpen={setOpen} type={type} />
     </Card>
   );
 }
@@ -84,5 +105,6 @@ function HospitalInsuranceList({ title, list, type, open, setOpen }) {
 HospitalInsuranceList.propTypes = {
   title: PropTypes.string.isRequired,
   list: PropTypes.arrayOf(PropTypes.object).isRequired,
+  type: PropTypes.string.isRequired,
 };
 export default HospitalInsuranceList;

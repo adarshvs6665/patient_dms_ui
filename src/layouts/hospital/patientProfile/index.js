@@ -5,16 +5,14 @@ import ArgonBox from "components/ArgonBox";
 
 // Argon Dashboard 2 MUI example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import Footer from "examples/Footer";
-import ProfileInfoCard from "./ProfileInfoCard";
+import ProfileInfoCard from "layouts/hospital/patientProfile/components/ProfileInfoCard";
 
 // Overview page components
 import Header from "layouts/hospital/patientProfile/components/Header";
 
 // Data
-import HospitalListData from "layouts/hospital/patientProfile/data/HospitalListData";
-import HospitalInsuranceList from "./hospitalInsuranceList";
-import ReportInformation from "./components/ReportInformation";
+import HospitalInsuranceList from "layouts/hospital/patientProfile/components/hospitalInsuranceList";
+import ReportInformation from "layouts/hospital/patientProfile/components/ReportInformation";
 import { useParams } from "react-router-dom";
 import { fetchPatientProfile } from "services/common/fetchPatient";
 import { useState, useEffect } from "react";
@@ -35,7 +33,7 @@ function Overview() {
   const [hospitalListData, setHospitalListData] = useState([]);
   const [insuranceListData, setInsuranceListData] = useState([]);
   const [patientReports, setPatientReports] = useState([]);
-  const [controller, dispatch] = useArgonController();
+  const [controller] = useArgonController();
   const { auth } = controller;
 
   useEffect(() => {

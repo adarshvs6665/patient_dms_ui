@@ -24,9 +24,8 @@ function PatientGrid() {
   const [columns, setColumns] = useState([]);
   const [rows, setRows] = useState([]);
   const [open, setOpen] = useState(false);
-  const [controller, dispatch] = useArgonController();
+  const [controller] = useArgonController();
   const { auth } = controller;
-  
 
   useEffect(() => {
     fetchAuthorisedPatients(auth.id).then((response) => {
@@ -70,7 +69,8 @@ function PatientGrid() {
                       `${borderWidth[1]} solid ${borderColor}`,
                   },
                 },
-                height: "75vh", overflowY: "scroll"
+                height: "75vh",
+                overflowY: "scroll",
               }}
             >
               <Table columns={columns} rows={rows} />
