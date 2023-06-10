@@ -176,8 +176,7 @@ function Configurator() {
           <ArgonBox mb={2}>
             <ArgonButton
               component={Link}
-              href="https://www.creative-tim.com/product/argon-dashboard-pro-material-ui"
-              target="_blank"
+              href="#"
               rel="noreferrer"
               color="info"
               fullWidth
@@ -188,8 +187,7 @@ function Configurator() {
           <ArgonBox mb={2}>
             <ArgonButton
               component={Link}
-              href="https://www.creative-tim.com/product/argon-dashboard-material-ui"
-              target="_blank"
+              href="#"
               rel="noreferrer"
               color="dark"
               fullWidth
@@ -199,8 +197,7 @@ function Configurator() {
           </ArgonBox>
           <ArgonButton
             component={Link}
-            href="https://www.creative-tim.com/learning-lab/react/quick-start/argon-dashboard/"
-            target="_blank"
+            href="#"
             rel="noreferrer"
             color={darkMode ? "white" : "dark"}
             variant="outlined"
@@ -211,11 +208,11 @@ function Configurator() {
         </ArgonBox>
         <ArgonBox display="flex" justifyContent="center">
           <GitHubButton
-            href="https://github.com/creativetimofficial/argon-dashboard-material-ui"
+            href="#"
             data-icon="octicon-star"
             data-size="large"
             data-show-count="true"
-            aria-label="Star creativetimofficial/argon-dashboard-material-uit on GitHub"
+            aria-label="GitHub"
           >
             Star
           </GitHubButton>
@@ -229,8 +226,7 @@ function Configurator() {
             <ArgonBox mr={1.5}>
               <ArgonButton
                 component={Link}
-                href="//twitter.com/intent/tweet?text=Check%20Argon%20Dashboard%202%20PRO%20MUI%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23react%20%mui&url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fargon-dashboard-material-ui"
-                target="_blank"
+                href="#"
                 rel="noreferrer"
                 color="dark"
               >
@@ -240,8 +236,7 @@ function Configurator() {
             </ArgonBox>
             <ArgonButton
               component={Link}
-              href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/argon-dashboard-material-ui"
-              target="_blank"
+              href="#"
               rel="noreferrer"
               color="dark"
             >

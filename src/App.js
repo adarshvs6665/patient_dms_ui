@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 
 // react-router components
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
@@ -11,7 +11,6 @@ import Icon from "@mui/material/Icon";
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
 import SignIn from "layouts/authentication/sign-in";
-import SignUp from "layouts/authentication/sign-up";
 
 // Argon Dashboard 2 MUI example components
 import Sidenav from "examples/Sidenav";
@@ -20,10 +19,6 @@ import Configurator from "examples/Configurator";
 // Argon Dashboard 2 MUI themes
 import theme from "assets/theme";
 import themeDark from "assets/theme-dark";
-
-// RTL plugins
-import rtlPlugin from "stylis-plugin-rtl";
-import createCache from "@emotion/cache";
 
 // Argon Dashboard 2 MUI routes
 import { hospitalRoutes, adminRoutes } from "routes";
@@ -54,7 +49,6 @@ export default function App() {
     auth,
   } = controller;
   const [onMouseEnter, setOnMouseEnter] = useState(false);
-  const [rtlCache, setRtlCache] = useState(null);
   const { pathname } = useLocation();
   const [tmpRoutes, setTmpRoutes] = useState([]);
   const [brandName, setBrandName] = useState("PMS DAPP");
@@ -74,16 +68,6 @@ export default function App() {
       setBrandName("Patient Profile");
     }
   }, [auth]);
-
-  // Cache for the rtl
-  useMemo(() => {
-    const cacheRtl = createCache({
-      key: "rtl",
-      stylisPlugins: [rtlPlugin],
-    });
-
-    setRtlCache(cacheRtl);
-  }, []);
 
   // Open sidenav when mouse enter on mini sidenav
   const handleOnMouseEnter = () => {
@@ -173,16 +157,16 @@ export default function App() {
 
         <Routes>
 
-          {/* if admin is logged in only admin routes are enabled */}
+          {/* if hospital is logged in only hospital routes are enabled */}
           {auth.role === "hospital" && getRoutes(hospitalRoutes)}
 
-          {/* if hospital is logged in only hospital routes are enabled */}
+          {/* if admin is logged in only admin routes are enabled */}
           {auth.role === "admin" && getRoutes(adminRoutes)}
 
-          {/* if hospital is logged in only hospital routes are enabled */}
+          {/* if insurance is logged in only insurance routes are enabled */}
           {auth.role === "insurance" && getRoutes(insuranceRoutes)}
 
-          {/* if hospital is logged in only hospital routes are enabled */}
+          {/* if patient is logged in only patient routes are enabled */}
           {auth.role === "patient" && getRoutes(patientRoutes)}
 
           <Route
@@ -209,9 +193,6 @@ export default function App() {
             element={<SignIn role="Hospital" title="Hosptail Sign In" />}
             key="hospital-sign-in"
           />
-          <Route exact path="/sign-in" element={<SignIn />} key="admin-sign-in" />
-          
-          <Route exact path="/sign-up" element={<SignUp />} key="admin-sign-up" />
 
           {/* if admin is logged in and any random route is accessed the page is redirected to admin dashboard */}
           {auth.role === "admin" && <Route path="*" element={<Navigate to="/admin/hospitals" />} />}
@@ -222,10 +203,10 @@ export default function App() {
           {/* if insurance is logged in and any random route is accessed the page is redirected to insurance dashboard */}
           {auth.role === "insurance" && <Route path="*" element={<Navigate to="/insurance/patients" />} />}
 
-          {/* if insurance is logged in and any random route is accessed the page is redirected to insurance dashboard */}
+          {/* if patient is logged in and any random route is accessed the page is redirected to insurance patient */}
           {auth.role === "patient" && <Route path="*" element={<Navigate to="/patient/profile" />} />}
 
-           {/* if insurance is logged in and any random route is accessed the page is redirected to insurance dashboard */}
+           {/* if noone is logged in and any random route is accessed the page is redirected to admin signin */}
            {!auth.role && <Route path="*" element={<Navigate to="/authentication/admin/sign-in" />} />}
           
         </Routes>

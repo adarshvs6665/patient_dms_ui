@@ -1,10 +1,6 @@
-// @mui material components
-import Link from "@mui/material/Link";
-
 // Argon Dashboard 2 MUI components
 import ArgonButton from "components/ArgonButton";
 import ArgonBox from "components/ArgonBox";
-import ArgonTypography from "components/ArgonTypography";
 
 // Argon Dashboard 2 MUI context
 import { useArgonController } from "context";
@@ -14,7 +10,7 @@ import { setAuth } from "context";
 
 function SidenavFooter() {
   const [controller, dispatch] = useArgonController();
-  const { miniSidenav, darkSidenav, auth } = controller;
+  const { miniSidenav, auth } = controller;
   const navigate = useNavigate();
 
   const handleLogout = ()=>{
@@ -54,18 +50,6 @@ function SidenavFooter() {
         >
           Log out
         </ArgonButton>
-        {/* <ArgonButton
-          component={Link}
-          href="https://www.creative-tim.com/product/argon-dashboard-material-ui"
-          target="_blank"
-          rel="noreferrer"
-          color="info"
-          size="small"
-          fullWidth
-          mb={2}
-        >
-          Log out
-        </ArgonButton> */}
       </ArgonBox>
     </ArgonBox>
   );

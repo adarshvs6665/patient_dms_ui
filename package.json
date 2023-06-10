@@ -1,7 +1,7 @@
 {
-  "name": "argon-dashboard-mui",
+  "name": "pdms",
   "version": "3.0.0",
-  "author": "John",
+  "author": "4th year IT Students, UCEK",
   "license": "MIT",
   "description": "Patient data management system",
   "engines": {
