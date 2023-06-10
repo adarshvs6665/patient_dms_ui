@@ -10,9 +10,6 @@ import ArgonTypography from "components/ArgonTypography";
 import { useArgonController } from "context";
 import { useNavigate } from "react-router-dom";
 
-// Images
-import icon from "assets/images/illustrations/icon-documentation.svg";
-import { useEffect, useState } from "react";
 import { setAuth } from "context";
 
 function SidenavFooter() {

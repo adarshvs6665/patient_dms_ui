@@ -19,13 +19,10 @@ import Configurator from "examples/Configurator";
 
 // Argon Dashboard 2 MUI themes
 import theme from "assets/theme";
-import themeRTL from "assets/theme/theme-rtl";
 import themeDark from "assets/theme-dark";
-import themeDarkRTL from "assets/theme-dark/theme-rtl";
 
 // RTL plugins
 import rtlPlugin from "stylis-plugin-rtl";
-import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 
 // Argon Dashboard 2 MUI routes
@@ -40,7 +37,6 @@ import brandDark from "assets/images/logo-ct-dark.png";
 // Icon Fonts
 import "assets/css/nucleo-icons.css";
 import "assets/css/nucleo-svg.css";
-import { Handshake } from "@mui/icons-material";
 import { insuranceRoutes } from "routes";
 import { patientRoutes } from "routes";
 
