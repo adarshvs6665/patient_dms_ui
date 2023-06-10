@@ -41,7 +41,6 @@ function Overview() {
       setPateientProfile(response.data);
     });
     fetchAuthorisedHospitals(id, auth.id).then((response) => {
-      console.log(response.data);
       setHospitalListData(response.data.authorizedHospitals);
     });
     fetchAuthorisedInsurances(id, auth.id).then((response) => {

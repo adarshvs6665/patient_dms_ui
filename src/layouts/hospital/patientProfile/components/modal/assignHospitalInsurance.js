@@ -66,7 +66,6 @@ export default function AssignHospitalInsuranceModal({ open, setOpen, type }) {
       };
 
       const response = await authorizeHospital(data);
-      console.log(response);
       if (response.status === "success") {
         toast(response.message);
         setToBeAuthorizedId("");
@@ -82,7 +81,6 @@ export default function AssignHospitalInsuranceModal({ open, setOpen, type }) {
         insuranceCompanyToBeAuthorizedId: toBeAuthorizedId,
       };
       const response = await authorizeInsuranceCompany(data);
-      console.log(response);
       if (response.status === "success") {
         toast(response.message);
         setToBeAuthorizedId("");
@@ -127,7 +125,6 @@ export default function AssignHospitalInsuranceModal({ open, setOpen, type }) {
                   IconComponent={ArrowDropDownIcon}
                   value={toBeAuthorizedId}
                   onChange={(event) => {
-                    console.log(event.target.value);
                     setToBeAuthorizedId(event.target.value);
                   }}
                 >

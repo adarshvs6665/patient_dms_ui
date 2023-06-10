@@ -57,7 +57,6 @@ function Illustration({ role, title }) {
         case "Admin":
           try {
             const response = await adminLoginService({ email, password });
-            console.log("Res", response);
             const auth = JSON.parse(localStorage.getItem("auth"));
             setAuth(dispatch, auth);
             navigate("/admin/hospitals");
@@ -68,11 +67,8 @@ function Illustration({ role, title }) {
         case "Patient":
           try {
             const response = await patientLoginService({ email, password });
-            console.log("Res", response);
             const auth = JSON.parse(localStorage.getItem("auth"));
-            console.log(auth.role);
             await setAuth(dispatch, auth);
-            console.log(auth.role);
             navigate(`/patient/profile/${auth.id}`);
           } catch (error) {
             toast(error.message);
@@ -81,11 +77,8 @@ function Illustration({ role, title }) {
         case "Hospital":
           try {
             const response = await hospitalLoginService({ email, password });
-            console.log("Res", response);
             const auth = JSON.parse(localStorage.getItem("auth"));
-            console.log(auth.role);
             await setAuth(dispatch, auth);
-            console.log(auth.role);
             navigate("/hospital/patients");
           } catch (error) {
             toast(error.message);
@@ -94,11 +87,8 @@ function Illustration({ role, title }) {
         case "Insurance":
           try {
             const response = await insuranceLoginService({ email, password });
-            console.log("Res", response);
             const auth = JSON.parse(localStorage.getItem("auth"));
-            console.log(auth.role);
             await setAuth(dispatch, auth);
-            console.log(auth.role);
             navigate("/insurance/patients");
           } catch (error) {
             toast(error.message);

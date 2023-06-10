@@ -65,7 +65,6 @@ export default function AddInsuranceModal(props) {
       adminId: auth.id
     };
     const response = await adminAddInsurance(data);
-    console.log(response)
     if(response.status==="success"){
       toast(response.message);
       setWallet("")
@@ -168,7 +167,6 @@ export default function AddInsuranceModal(props) {
                   displayEmpty
                   value={wallet}
                   onChange={(event) => {
-                    console.log(event.target.value);
                     setWallet(event.target.value);
                   }}
                 >

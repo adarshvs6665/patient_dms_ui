@@ -64,7 +64,6 @@ export default function AddPatientReportModal(props) {
       },
     };
     const response = await updatePatient(data);
-    console.log(response);
     if (response.status === "success") {
       toast(response.message);
       props.setOpen(false);

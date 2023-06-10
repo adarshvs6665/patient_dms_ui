@@ -74,7 +74,6 @@ export default function AddPatientModal(props) {
       hospitalId: auth.id,
     };
     const response = await createPatient(data);
-    console.log(response);
     if (response.status === "success") {
       toast(response.message);
       setWallet("");
@@ -248,7 +247,6 @@ export default function AddPatientModal(props) {
                   IconComponent={ArrowDropDownIcon}
                   value={wallet}
                   onChange={(event) => {
-                    console.log(event.target.value);
                     setWallet(event.target.value);
                   }}
                 >
