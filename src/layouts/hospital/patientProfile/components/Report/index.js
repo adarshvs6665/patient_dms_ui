@@ -57,13 +57,13 @@ function Report({
             mt={{ xs: 2, sm: 0 }}
             ml={{ xs: -1.5, sm: 0 }}
           >
-            <ArgonBox mr={1}>
+            {/* <ArgonBox mr={1}>
               <ArgonButton variant="text" color="error">
                 <Icon>delete</Icon>&nbsp;Delete
               </ArgonButton>
-            </ArgonBox>
+            </ArgonBox> */}
             <ArgonButton variant="text" color="dark">
-              <Icon>edit</Icon>&nbsp;Edit
+              <Icon>share</Icon>&nbsp;Share
             </ArgonButton>
           </ArgonBox>
         </ArgonBox>

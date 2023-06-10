@@ -8,6 +8,8 @@ import ArgonBox from "components/ArgonBox";
 import ArgonTypography from "components/ArgonTypography";
 import ArgonButton from "components/ArgonButton";
 
+import { useNavigate } from "react-router-dom";
+
 // Custom styles for the Configurator
 import ConfiguratorRoot from "layouts/authentication/components/Configurator/ConfiguratorRoot";
 
@@ -17,6 +19,8 @@ import { useArgonController, setOpenConfigurator } from "context";
 function Configurator() {
   const [controller, dispatch] = useArgonController();
   const { openConfigurator, darkMode } = controller;
+
+  const navigate = useNavigate();
 
   const handleCloseConfigurator = () => setOpenConfigurator(dispatch, false);
 
@@ -56,9 +60,7 @@ function Configurator() {
         <ArgonBox mt={5} mb={2}>
           <ArgonBox mb={2}>
             <ArgonButton
-              component={Link}
-              href="/authentication/patient/sign-in"
-              rel="noreferrer"
+              onClick={() => {navigate("/authentication/patient/sign-in");}}
               color="info"
               fullWidth
             >
@@ -67,9 +69,7 @@ function Configurator() {
           </ArgonBox>
           <ArgonBox mb={2}>
             <ArgonButton
-              component={Link}
-              href="/authentication/hospital/sign-in"
-              rel="noreferrer"
+              onClick={() => {navigate("/authentication/hospital/sign-in");}}
               color="primary"
               fullWidth
             >
@@ -78,9 +78,7 @@ function Configurator() {
           </ArgonBox>
           <ArgonBox mb={2}>
             <ArgonButton
-              component={Link}
-              href="/authentication/insurance/sign-in"
-              rel="noreferrer"
+              onClick={() => {navigate("/authentication/insurance/sign-in");}}
               color="warning"
               fullWidth
             >
@@ -88,9 +86,7 @@ function Configurator() {
             </ArgonButton>
           </ArgonBox>
           <ArgonButton
-            component={Link}
-            href="/authentication/admin/sign-in"
-            rel="noreferrer"
+            onClick={() => {navigate("/authentication/admin/sign-in");}}
             color="dark"
             fullWidth
           >

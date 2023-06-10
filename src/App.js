@@ -14,7 +14,7 @@ import SignIn from "layouts/authentication/sign-in";
 
 // Argon Dashboard 2 MUI example components
 import Sidenav from "examples/Sidenav";
-import Configurator from "examples/Configurator";
+
 
 // Argon Dashboard 2 MUI themes
 import theme from "assets/theme";
@@ -23,7 +23,7 @@ import themeDark from "assets/theme-dark";
 // Argon Dashboard 2 MUI routes
 import { hospitalRoutes, adminRoutes } from "routes";
 // Argon Dashboard 2 MUI contexts
-import { useArgonController, setMiniSidenav, setOpenConfigurator } from "context";
+import { useArgonController, setMiniSidenav } from "context";
 
 // Images
 import brand from "assets/images/logo-ct.png";
@@ -42,7 +42,6 @@ export default function App() {
     miniSidenav,
     direction,
     layout,
-    openConfigurator,
     sidenavColor,
     darkSidenav,
     darkMode,
@@ -86,7 +85,6 @@ export default function App() {
   };
 
   // Change the openConfigurator state
-  const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
 
   // Setting the dir attribute for the body element
   useEffect(() => {
@@ -112,29 +110,7 @@ export default function App() {
       return null;
     });
 
-  const configsButton = (
-    <ArgonBox
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      width="3.5rem"
-      height="3.5rem"
-      bgColor="white"
-      shadow="sm"
-      borderRadius="50%"
-      position="fixed"
-      right="2rem"
-      bottom="2rem"
-      zIndex={99}
-      color="dark"
-      sx={{ cursor: "pointer" }}
-      onClick={handleConfiguratorOpen}
-    >
-      <Icon fontSize="default" color="inherit">
-        settings
-      </Icon>
-    </ArgonBox>
-  );
+
 
   return (
     <ThemeProvider theme={darkMode ? themeDark : theme}>
@@ -150,8 +126,6 @@ export default function App() {
               onMouseEnter={handleOnMouseEnter}
               onMouseLeave={handleOnMouseLeave}
             />
-            <Configurator />
-            {configsButton}
           </>
         )}
 
