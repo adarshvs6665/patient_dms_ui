@@ -88,15 +88,6 @@ export default function AssignHospitalInsuranceModal(props) {
             </ArgonBox>
 
             <ArgonBox mb={2}>
-              {/* <ArgonInput
-                type="select"
-                placeholder="Wallet"
-                size="large"
-                onChange={(event) => {
-                  setWallet(event.target.value);
-                }}
-              />
-               */}
             </ArgonBox>
             <Stack mt={4} mb={1} direction={"row"} gap={2}>
               <ArgonButton color="secondary" size="medium" onClick={handleClose} fullWidth>

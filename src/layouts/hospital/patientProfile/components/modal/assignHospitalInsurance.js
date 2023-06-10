@@ -162,7 +162,7 @@ export default function AssignHospitalInsuranceModal({ open, setOpen, type }) {
                 Cancel
               </ArgonButton>
               <ArgonButton color="dark" size="medium" onClick={handleSubmit} fullWidth>
-                {type === "hospital" ? "Create Hospital" : "Create Insurance"}
+                {type === "hospital" ? "Assign Hospital" : "Assign Insurance"}
               </ArgonButton>
             </Stack>
             <ArgonBox mt={3} textAlign="center"></ArgonBox>
