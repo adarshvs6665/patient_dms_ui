@@ -8,32 +8,44 @@ import ArgonBox from "components/ArgonBox";
 import ArgonButton from "components/ArgonButton";
 import ArgonTypography from "components/ArgonTypography";
 
-
 // Report page components
 import Report from "layouts/hospital/patientProfile/components/Report";
 import AddPatientReportModal from "layouts/hospital/patientProfile/components/modal/addPatientReport";
 
-function ReportInformation({ patientReports,open,setOpen }) {
+function ReportInformation({ patientReports, open, setOpen }) {
   return (
     <Card id="delete-account">
-      <ArgonBox pt={3} px={2} pb={2} display="flex" justifyContent="space-between" alignItems="center">
+      <ArgonBox
+        pt={3}
+        px={2}
+        pb={2}
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <ArgonTypography variant="h6" fontWeight="medium">
           Patient Reports
         </ArgonTypography>
-        <ArgonTypography  variant="body2" color="secondary" onClick={()=>{setOpen(true)}}>
-          <Tooltip title={"Authorize new hospital"} placement="top">
-          <ArgonButton
-                  component="button"
-                  rel="noreferrer"
-                  color="dark"
-                  fullWidth
-                  onClick={() => {
-                    setOpen(true);
-                  }}
-                >
-                  <Icon sx={{ fontWeight: "bold" }}>add</Icon>
-                  &nbsp;{"Add New Report"}&nbsp;
-                </ArgonButton>
+        <ArgonTypography
+          variant="body2"
+          color="secondary"
+          onClick={() => {
+            setOpen(true);
+          }}
+        >
+          <Tooltip title={"Add report"} placement="top">
+            <ArgonButton
+              component="button"
+              rel="noreferrer"
+              color="dark"
+              fullWidth
+              onClick={() => {
+                setOpen(true);
+              }}
+            >
+              <Icon sx={{ fontWeight: "bold" }}>add</Icon>
+              &nbsp;{"Add New Report"}&nbsp;
+            </ArgonButton>
           </Tooltip>
         </ArgonTypography>
       </ArgonBox>
@@ -57,7 +69,7 @@ function ReportInformation({ patientReports,open,setOpen }) {
           })}
         </ArgonBox>
       </ArgonBox>
-      <AddPatientReportModal open={open} setOpen={setOpen}/>
+      <AddPatientReportModal open={open} setOpen={setOpen} />
     </Card>
   );
 }
