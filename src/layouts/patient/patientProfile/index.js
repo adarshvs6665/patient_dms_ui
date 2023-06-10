@@ -5,7 +5,7 @@ import ArgonBox from "components/ArgonBox";
 
 // Argon Dashboard 2 MUI example components
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import ProfileInfoCard from "./ProfileInfoCard";
+import ProfileInfoCard from "layouts/patient/patientProfile/components/ProfileInfoCard";
 
 // Overview page components
 import Header from "layouts/patient/patientProfile/components/Header";
@@ -53,7 +53,7 @@ function Overview() {
 
   useEffect(() => {
     fetchPatientReports(id, auth.id).then((response) => {
-      setPatientReports(response.data.reports);
+      setPatientReports(response.data.reports.reverse());
     });
   }, [openReport]);
 

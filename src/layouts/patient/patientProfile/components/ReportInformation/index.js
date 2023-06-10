@@ -10,7 +10,7 @@ import ArgonTypography from "components/ArgonTypography";
 
 
 // Report page components
-import Report from "layouts/hospital/patientProfile/components/Report";
+import Report from "layouts/patient/patientProfile/components/Report";
 
 
 function ReportInformation({ patientReports,open,setOpen }) {
@@ -23,7 +23,7 @@ function ReportInformation({ patientReports,open,setOpen }) {
       </ArgonBox>
       <ArgonBox pt={1} pb={2} px={2} sx={{ height: "50vh", overflowY: "scroll" }}>
         <ArgonBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
-          {patientReports.reverse().map((item, key) => {
+          {patientReports.map((item, key) => {
             return (
               <Report
                 key={key}
