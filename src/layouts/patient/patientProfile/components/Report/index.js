@@ -2,7 +2,6 @@
 // prop-types is a library for typechecking of props
 // @mui material components
 import Icon from "@mui/material/Icon";
-
 // Argon Dashboard 2 MUI components
 import ArgonBox from "components/ArgonBox";
 import ArgonTypography from "components/ArgonTypography";
@@ -10,6 +9,10 @@ import ArgonButton from "components/ArgonButton";
 
 // Argon Dashboard 2 MUI contexts
 import { useArgonController } from "context";
+import ReportPdf from "examples/pdfGenerator";
+import { useState } from "react";
+import PdfModal from "./pdfModal";
+import { fetchReportPdf } from "services/common/fetchReportPdf";
 
 function Report({
   dateOfVisit,
@@ -20,10 +23,52 @@ function Report({
   medication,
   hospitalName,
   reportId,
-  noGutter
+  name,
+  noGutter,
 }) {
   const [controller] = useArgonController();
   const { darkMode } = controller;
+
+  const [open, setOpen] = useState(false);
+  const [blob, setBlob] = useState(null);
+
+  const onDownload = async () => {
+    const data = {
+      dateOfVisit,
+      causeOfVisit,
+      condition,
+      description,
+      doctor,
+      medication,
+      hospitalName,
+      reportId,
+      name,
+    };
+    const response = await fetchReportPdf(data);
+    const element = document.createElement("a");
+    element.href = URL.createObjectURL(response);
+    element.download = "Medical Report " + Date.now() + ".pdf";
+    document.body.appendChild(element);
+    element.click();
+  };
+
+  const onView = async () => {
+    const data = {
+      dateOfVisit,
+      causeOfVisit,
+      condition,
+      description,
+      doctor,
+      medication,
+      hospitalName,
+      reportId,
+      name,
+    };
+    const response = await fetchReportPdf(data);
+    const blobUrl = URL.createObjectURL(response);
+    setBlob(blobUrl);
+    setOpen(true);
+  };
 
   return (
     <ArgonBox
@@ -58,12 +103,24 @@ function Report({
             ml={{ xs: -1.5, sm: 0 }}
           >
             <ArgonBox mr={1}>
-              <ArgonButton variant="text" color="error">
-                <Icon>delete</Icon>&nbsp;Delete
+              <ArgonButton
+                variant="text"
+                color="error"
+                onClick={() => {
+                  onView();
+                }}
+              >
+                <Icon>desktop_mac</Icon>&nbsp;View
               </ArgonButton>
             </ArgonBox>
-            <ArgonButton variant="text" color="dark">
-              <Icon>edit</Icon>&nbsp;Edit
+            <ArgonButton
+              variant="text"
+              color="dark"
+              onClick={() => {
+                onDownload();
+              }}
+            >
+              <Icon>download</Icon>&nbsp;Download
             </ArgonButton>
           </ArgonBox>
         </ArgonBox>
@@ -132,6 +189,7 @@ function Report({
           </ArgonTypography>
         </ArgonBox>
       </ArgonBox>
+      <PdfModal open={open} setOpen={setOpen} blob={blob} />
     </ArgonBox>
   );
 }
@@ -142,6 +200,5 @@ Report.defaultProps = {
 };
 
 // Typechecking props for the Report
-
 
 export default Report;

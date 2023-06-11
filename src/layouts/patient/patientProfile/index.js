@@ -96,6 +96,7 @@ function Overview() {
               patientReports={patientReports}
               open={openReport}
               setOpen={setOpenReport}
+              name={pateientProfile.name}
             />
           </Grid>
         </Grid>

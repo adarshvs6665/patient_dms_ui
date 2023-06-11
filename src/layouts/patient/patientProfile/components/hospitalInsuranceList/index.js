@@ -36,11 +36,11 @@ function HospitalInsuranceList({ title, list, type }) {
           {email}
         </ArgonTypography>
       </ArgonBox>
-      <ArgonBox ml="auto">
+      {/* <ArgonBox ml="auto">
         <ArgonButton variant="outline" color={"black"}>
           Delete
         </ArgonButton>
-      </ArgonBox>
+      </ArgonBox> */}
     </ArgonBox>
   ));
 
