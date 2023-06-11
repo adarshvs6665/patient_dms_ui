@@ -28,24 +28,23 @@ Make sure you have the following software installed on your machine:
 1. Clone the repository:
 
    ```console
-   `git clone https://github.com/adarshvs6665/patient_dms_ui`
+   git clone https://github.com/adarshvs6665/patient_dms_ui
 2. Navigate to the project directory:
 
    ```console
-   `cd patient_dms_ui`
+   cd patient_dms_ui
 3. Install the dependencies:
 
    ```console
-   `npm install`
+   npm install
 
 ## Usage
 
 1. Start the development server:
 
    ```console
-    `npm start`
-
-    This command will start the development server, and the application will be accessible at http://localhost:3000.
+    npm start
+This command will start the development server, and the application will be accessible at http://localhost:3000.
 
 2. Open your web browser and visit http://localhost:3000 to access the application.
 
