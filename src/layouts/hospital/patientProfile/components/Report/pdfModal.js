@@ -5,9 +5,10 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import ArgonBox from "components/ArgonBox";
 import ArgonButton from "components/ArgonButton";
+import CloseIcon from "@mui/icons-material/Close";
+import IconButton from "@mui/material/IconButton";
 
 import { Stack } from "@mui/material";
-import ReportPdf from "examples/pdfGenerator";
 
 const style = {
   position: "absolute",
@@ -33,22 +34,25 @@ export default function PdfModal(props) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Enter patient details
-          </Typography>
-          <ArgonBox>
-            <ReportPdf />
-          </ArgonBox>
-          <ArgonBox component="form" role="form" sx={{ mt: 2 }}>
-            <Stack mt={4} mb={1} direction={"row"} gap={2}>
-              <ArgonButton color="secondary" size="medium" onClick={handleClose} fullWidth>
-                Cancel
-              </ArgonButton>
-              <ArgonButton color="dark" size="medium" onClick={handleClose} fullWidth>
-                Create Patient
-              </ArgonButton>
-            </Stack>
-            <ArgonBox mt={3} textAlign="center"></ArgonBox>
+          <Stack direction={"row"} alignItems={"center"} justifyContent={"space-between"}>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Medical Report
+            </Typography>
+            <IconButton aria-label="close" size="medium" onClick={handleClose} >
+              <CloseIcon fontSize="inherit" />
+            </IconButton>
+          </Stack>
+          <ArgonBox mt={2}>
+            <iframe
+              style={{
+                width: "100%",
+                height: "80vh",
+              }}
+              src={props.blob}
+              type="application/pdf"
+              title="title"
+              name="SS"
+            />
           </ArgonBox>
         </Box>
       </Modal>

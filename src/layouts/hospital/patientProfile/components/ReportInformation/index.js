@@ -12,7 +12,7 @@ import ArgonTypography from "components/ArgonTypography";
 import Report from "layouts/hospital/patientProfile/components/Report";
 import AddPatientReportModal from "layouts/hospital/patientProfile/components/modal/addPatientReport";
 
-function ReportInformation({ patientReports, open, setOpen }) {
+function ReportInformation({ patientReports, open, setOpen,name }) {
   return (
     <Card id="delete-account">
       <ArgonBox
@@ -64,6 +64,7 @@ function ReportInformation({ patientReports, open, setOpen }) {
                 hospitalId={item.hospitalId}
                 reportId={item.reportId}
                 hospitalName={item.hospitalName}
+                name={name}
               />
             );
           })}
