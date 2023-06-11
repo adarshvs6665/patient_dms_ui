@@ -45,11 +45,11 @@ Make sure you have the following software installed on your machine:
    ```console
     `npm start`
 
-This command will start the development server, and the application will be accessible at http://localhost:3000.
+    This command will start the development server, and the application will be accessible at http://localhost:3000.
 
 2. Open your web browser and visit http://localhost:3000 to access the application.
 
-3.Use the provided user interfaces and functionality based on your user role (admin, hospital, insurance company, or patient) as described above.
+3. Use the provided user interfaces and functionality based on your user role (admin, hospital, insurance company, or patient) as described above.
 
 # Contributing
 
