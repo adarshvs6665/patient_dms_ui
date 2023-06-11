@@ -57,14 +57,6 @@ function Report({
             mt={{ xs: 2, sm: 0 }}
             ml={{ xs: -1.5, sm: 0 }}
           >
-            <ArgonBox mr={1}>
-              <ArgonButton variant="text" color="error">
-                <Icon>delete</Icon>&nbsp;Delete
-              </ArgonButton>
-            </ArgonBox>
-            <ArgonButton variant="text" color="dark">
-              <Icon>edit</Icon>&nbsp;Edit
-            </ArgonButton>
           </ArgonBox>
         </ArgonBox>
         <ArgonBox mb={1} lineHeight={0}>
